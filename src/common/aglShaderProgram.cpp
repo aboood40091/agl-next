@@ -579,15 +579,17 @@ void ShaderProgram::setShaderGX2_() const
 #elif RIO_IS_WIN
     mShader.bind();
 
+    mShader.setUniform(7u,      u32(-1), mShader.getFragmentUniformLocation("PS_PUSH.alphaFunc"));
+    mShader.setUniform(u32(-1), u32(-1), mShader.getFragmentUniformLocation("PS_PUSH.uItemID"));
+    mShader.setUniform(0,       u32(-1), mShader.getFragmentUniformLocation("PS_PUSH.uIsSelected"));
+
     if (isUseBinaryProgram())
     {
         mShader.setUniform(rio::BaseVec4f{ 1.0f, -1.0f, 0.0f, 0.0f }, mShader.getVertexUniformLocation("VS_PUSH.posMulAdd"), u32(-1));
         mShader.setUniform(rio::BaseVec4f{ 0.0f,  1.0f, 1.0f, 1.0f }, mShader.getVertexUniformLocation("VS_PUSH.zSpaceMul"), u32(-1));
         mShader.setUniform(1.0f,                                      mShader.getVertexUniformLocation("VS_PUSH.pointSize"), u32(-1));
 
-
-        mShader.setUniform(7u,   u32(-1), mShader.getFragmentUniformLocation("PS_PUSH.alphaFunc"));
-        mShader.setUniform(0u,   u32(-1), mShader.getFragmentUniformLocation("PS_PUSH.needsPremultiply"));
+        mShader.setUniform(0u, u32(-1), mShader.getFragmentUniformLocation("PS_PUSH.needsPremultiply"));
 
         if (mVsCfileBlockIdx != -1)
         {
