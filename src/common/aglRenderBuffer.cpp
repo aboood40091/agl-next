@@ -26,8 +26,8 @@ RenderBuffer::RenderBuffer(const rio::Vector2i& size)
 
 void RenderBuffer::bind() const
 {
-    rio::Graphics::setViewport(0, 0, mSize.x, mSize.y);
-    rio::Graphics::setScissor(0, 0, mSize.x, mSize.y);
+    rio::Graphics::setViewport(0, 0, mSize.x, mSize.y, 0.0f, 1.0f, mSize.y);
+    rio::Graphics::setScissor(0, 0, mSize.x, mSize.y, mSize.y);
 
 #if RIO_IS_WIN
     mHandle->bind();
