@@ -807,7 +807,7 @@ bool DecompileProgram(
             ReplaceString(glFragmentShader, "int stackIdxVar;", "layout (location = 2) out uint ItemID;\n"
                                                                 "int stackIdxVar;");
             ReplaceString(glFragmentShader, "PIXEL_0 = _pixelTmp;", "if (PS_PUSH.uIsSelected != 0) "
-                                                                        "PIXEL_0 = vec4(_pixelTmp.rgb * 0.5f + vec3(1.0f, 0.25f, 0.25f) * 0.5f, 1.0f); "
+                                                                        "PIXEL_0 = vec4(_pixelTmp.rgb * 0.5f + vec3(1.0f, 0.25f, 0.25f) * 0.5f, _pixelTmp.a); "
                                                                     "else "
                                                                         "PIXEL_0 = _pixelTmp; "
                                                                     "ItemID = PS_PUSH.uItemID;");
