@@ -581,6 +581,70 @@ bool DecompileProgram(
                 std::ostringstream cmdStrm;
                 cmdStrm << "\"" << ShaderUtil::sSpirvCrossPath << "\" \"" << vertexShaderSpirvPath << "\" --no-es "  \
                     "--no-420pack-extension --no-support-nonzero-baseinstance " \
+                    "--rename-interface-variable out 0 PARAM_0 " \
+                    "--rename-interface-variable out 1 PARAM_1 " \
+                    "--rename-interface-variable out 2 PARAM_2 " \
+                    "--rename-interface-variable out 3 PARAM_3 " \
+                    "--rename-interface-variable out 4 PARAM_4 " \
+                    "--rename-interface-variable out 5 PARAM_5 " \
+                    "--rename-interface-variable out 6 PARAM_6 " \
+                    "--rename-interface-variable out 7 PARAM_7 " \
+                    "--rename-interface-variable out 8 PARAM_8 " \
+                    "--rename-interface-variable out 9 PARAM_9 " \
+                    "--rename-interface-variable out 10 PARAM_10 " \
+                    "--rename-interface-variable out 11 PARAM_11 " \
+                    "--rename-interface-variable out 12 PARAM_12 " \
+                    "--rename-interface-variable out 13 PARAM_13 " \
+                    "--rename-interface-variable out 14 PARAM_14 " \
+                    "--rename-interface-variable out 15 PARAM_15 " \
+                    "--rename-interface-variable out 16 PARAM_16 " \
+                    "--rename-interface-variable out 17 PARAM_17 " \
+                    "--rename-interface-variable out 18 PARAM_18 " \
+                    "--rename-interface-variable out 19 PARAM_19 " \
+                    "--rename-interface-variable out 20 PARAM_20 " \
+                    "--rename-interface-variable out 21 PARAM_21 " \
+                    "--rename-interface-variable out 22 PARAM_22 " \
+                    "--rename-interface-variable out 23 PARAM_23 " \
+                    "--rename-interface-variable out 24 PARAM_24 " \
+                    "--rename-interface-variable out 25 PARAM_25 " \
+                    "--rename-interface-variable out 26 PARAM_26 " \
+                    "--rename-interface-variable out 27 PARAM_27 " \
+                    "--rename-interface-variable out 28 PARAM_28 " \
+                    "--rename-interface-variable out 29 PARAM_29 " \
+                    "--rename-interface-variable out 30 PARAM_30 " \
+                    "--rename-interface-variable out 31 PARAM_31 " \
+                    "--rename-interface-variable out 32 PARAM_32 " \
+                    "--rename-interface-variable out 33 PARAM_33 " \
+                    "--rename-interface-variable out 34 PARAM_34 " \
+                    "--rename-interface-variable out 35 PARAM_35 " \
+                    "--rename-interface-variable out 36 PARAM_36 " \
+                    "--rename-interface-variable out 37 PARAM_37 " \
+                    "--rename-interface-variable out 38 PARAM_38 " \
+                    "--rename-interface-variable out 39 PARAM_39 " \
+                    "--rename-interface-variable out 40 PARAM_40 " \
+                    "--rename-interface-variable out 41 PARAM_41 " \
+                    "--rename-interface-variable out 42 PARAM_42 " \
+                    "--rename-interface-variable out 43 PARAM_43 " \
+                    "--rename-interface-variable out 44 PARAM_44 " \
+                    "--rename-interface-variable out 45 PARAM_45 " \
+                    "--rename-interface-variable out 46 PARAM_46 " \
+                    "--rename-interface-variable out 47 PARAM_47 " \
+                    "--rename-interface-variable out 48 PARAM_48 " \
+                    "--rename-interface-variable out 49 PARAM_49 " \
+                    "--rename-interface-variable out 50 PARAM_50 " \
+                    "--rename-interface-variable out 51 PARAM_51 " \
+                    "--rename-interface-variable out 52 PARAM_52 " \
+                    "--rename-interface-variable out 53 PARAM_53 " \
+                    "--rename-interface-variable out 54 PARAM_54 " \
+                    "--rename-interface-variable out 55 PARAM_55 " \
+                    "--rename-interface-variable out 56 PARAM_56 " \
+                    "--rename-interface-variable out 57 PARAM_57 " \
+                    "--rename-interface-variable out 58 PARAM_58 " \
+                    "--rename-interface-variable out 59 PARAM_59 " \
+                    "--rename-interface-variable out 60 PARAM_60 " \
+                    "--rename-interface-variable out 61 PARAM_61 " \
+                    "--rename-interface-variable out 62 PARAM_62 " \
+                    "--rename-interface-variable out 63 PARAM_63 " \
                     "--version 410 --output \"" << vertexShaderSrcPath << "\"";
                 cmd = cmdStrm.str();
             }
@@ -595,6 +659,70 @@ bool DecompileProgram(
                 std::ostringstream cmdStrm;
                 cmdStrm << "\"" << ShaderUtil::sSpirvCrossPath << "\" \"" << fragmentShaderSpirvPath << "\" --no-es "  \
                     "--no-420pack-extension --no-support-nonzero-baseinstance " \
+                    "--rename-interface-variable in 0 PARAM_0 " \
+                    "--rename-interface-variable in 1 PARAM_1 " \
+                    "--rename-interface-variable in 2 PARAM_2 " \
+                    "--rename-interface-variable in 3 PARAM_3 " \
+                    "--rename-interface-variable in 4 PARAM_4 " \
+                    "--rename-interface-variable in 5 PARAM_5 " \
+                    "--rename-interface-variable in 6 PARAM_6 " \
+                    "--rename-interface-variable in 7 PARAM_7 " \
+                    "--rename-interface-variable in 8 PARAM_8 " \
+                    "--rename-interface-variable in 9 PARAM_9 " \
+                    "--rename-interface-variable in 10 PARAM_10 " \
+                    "--rename-interface-variable in 11 PARAM_11 " \
+                    "--rename-interface-variable in 12 PARAM_12 " \
+                    "--rename-interface-variable in 13 PARAM_13 " \
+                    "--rename-interface-variable in 14 PARAM_14 " \
+                    "--rename-interface-variable in 15 PARAM_15 " \
+                    "--rename-interface-variable in 16 PARAM_16 " \
+                    "--rename-interface-variable in 17 PARAM_17 " \
+                    "--rename-interface-variable in 18 PARAM_18 " \
+                    "--rename-interface-variable in 19 PARAM_19 " \
+                    "--rename-interface-variable in 20 PARAM_20 " \
+                    "--rename-interface-variable in 21 PARAM_21 " \
+                    "--rename-interface-variable in 22 PARAM_22 " \
+                    "--rename-interface-variable in 23 PARAM_23 " \
+                    "--rename-interface-variable in 24 PARAM_24 " \
+                    "--rename-interface-variable in 25 PARAM_25 " \
+                    "--rename-interface-variable in 26 PARAM_26 " \
+                    "--rename-interface-variable in 27 PARAM_27 " \
+                    "--rename-interface-variable in 28 PARAM_28 " \
+                    "--rename-interface-variable in 29 PARAM_29 " \
+                    "--rename-interface-variable in 30 PARAM_30 " \
+                    "--rename-interface-variable in 31 PARAM_31 " \
+                    "--rename-interface-variable in 32 PARAM_32 " \
+                    "--rename-interface-variable in 33 PARAM_33 " \
+                    "--rename-interface-variable in 34 PARAM_34 " \
+                    "--rename-interface-variable in 35 PARAM_35 " \
+                    "--rename-interface-variable in 36 PARAM_36 " \
+                    "--rename-interface-variable in 37 PARAM_37 " \
+                    "--rename-interface-variable in 38 PARAM_38 " \
+                    "--rename-interface-variable in 39 PARAM_39 " \
+                    "--rename-interface-variable in 40 PARAM_40 " \
+                    "--rename-interface-variable in 41 PARAM_41 " \
+                    "--rename-interface-variable in 42 PARAM_42 " \
+                    "--rename-interface-variable in 43 PARAM_43 " \
+                    "--rename-interface-variable in 44 PARAM_44 " \
+                    "--rename-interface-variable in 45 PARAM_45 " \
+                    "--rename-interface-variable in 46 PARAM_46 " \
+                    "--rename-interface-variable in 47 PARAM_47 " \
+                    "--rename-interface-variable in 48 PARAM_48 " \
+                    "--rename-interface-variable in 49 PARAM_49 " \
+                    "--rename-interface-variable in 50 PARAM_50 " \
+                    "--rename-interface-variable in 51 PARAM_51 " \
+                    "--rename-interface-variable in 52 PARAM_52 " \
+                    "--rename-interface-variable in 53 PARAM_53 " \
+                    "--rename-interface-variable in 54 PARAM_54 " \
+                    "--rename-interface-variable in 55 PARAM_55 " \
+                    "--rename-interface-variable in 56 PARAM_56 " \
+                    "--rename-interface-variable in 57 PARAM_57 " \
+                    "--rename-interface-variable in 58 PARAM_58 " \
+                    "--rename-interface-variable in 59 PARAM_59 " \
+                    "--rename-interface-variable in 60 PARAM_60 " \
+                    "--rename-interface-variable in 61 PARAM_61 " \
+                    "--rename-interface-variable in 62 PARAM_62 " \
+                    "--rename-interface-variable in 63 PARAM_63 " \
                     "--version 410 --output \"" << fragmentShaderSrcPath << "\"";
                 cmd = cmdStrm.str();
             }
@@ -800,6 +928,9 @@ bool DecompileProgram(
                     }
                 }
             }
+
+            ReplaceString(glFragmentShader, "#version 410", "#version 430");
+            ReplaceString(glFragmentShader, "#extension GL_ARB_texture_query_levels : require\n", "");
 
             ReplaceString(glFragmentShader, "uint needsPremultiply;",   "uint needsPremultiply; "
                                                                         "uint uItemID; "
