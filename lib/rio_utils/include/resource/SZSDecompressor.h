@@ -32,7 +32,7 @@ public:
     };
 
 public:
-    static u8* tryDecomp(rio::FileDevice::LoadArg& arg);
+    static u8* tryDecomp(rio::FileDevice::LoadArg& arg, bool reject_uncompressed = true);
 
     static inline u8* tryDecomp(
         const u8* src, u32 src_size,
@@ -41,7 +41,7 @@ public:
     )
     {
         return tryDecomp_(
-            src, src_size, false,
+            src, src_size, false, true,
             dst, dst_size, alignment,
             out_size, out_buffer_size, out_need_delete
         );
@@ -49,7 +49,7 @@ public:
 
 private:
     static u8* tryDecomp_(
-        const u8* src, u32 src_size, bool src_need_delete,
+        const u8* src, u32 src_size, bool src_need_delete, bool reject_uncompressed,
         u8* dst, u32 dst_size, s32 alignment,
         u32* out_size, u32* out_buffer_size, bool* out_need_delete
     );
@@ -60,6 +60,7 @@ public:
         return 0x10;
     }
 
+    static u32 getMagic(const void* header);
     static u32 getDecompAlignment(const void* header);
     static u32 getDecompSize(const void* header);
 

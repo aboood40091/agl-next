@@ -26,13 +26,15 @@ void SZSDecompressor::DecompContext::initialize(void* dst)
     headerSize      = SZSDecompressor::getHeaderSize();
 }
 
-u8* SZSDecompressor::tryDecomp(rio::FileDevice::LoadArg& arg)
+u8* SZSDecompressor::tryDecomp(rio::FileDevice::LoadArg& arg, bool reject_uncompressed)
 {
     const u8*   src         = nullptr;
     u32         src_size    = 0;
     {
         rio::FileDevice::LoadArg load_arg;
         load_arg.path = arg.path;
+        if (!reject_uncompressed)
+            load_arg.alignment = arg.alignment;
 
         src = rio::FileDeviceMgr::instance()->tryLoad(load_arg);
         if (src)
@@ -43,20 +45,54 @@ u8* SZSDecompressor::tryDecomp(rio::FileDevice::LoadArg& arg)
     }
 
     return tryDecomp_(
-        src, src_size, true,
+        src, src_size, true, reject_uncompressed,
         arg.buffer, arg.buffer_size, arg.alignment,
         &arg.read_size, &arg.roundup_size, &arg.need_unload
     );
 }
 
 u8* SZSDecompressor::tryDecomp_(
-        const u8* src, u32 src_size, bool src_need_delete,
+        const u8* src, u32 src_size, bool src_need_delete, bool reject_uncompressed,
         u8* dst, u32 dst_size, s32 alignment,
         u32* out_size, u32* out_buffer_size, bool* out_need_delete
 )
 {
     if (!src)
         return nullptr;
+
+    RIO_ASSERT(src_size > 0);
+    bool uncompressed = src_size < sizeof(u32);
+    if (!uncompressed)
+        uncompressed = getMagic(src) != 0x59617A30; // Yaz0
+
+    if (uncompressed)
+    {
+        if (reject_uncompressed)
+        {
+            RIO_LOG("SZSDecompressor::tryDecomp_(): File is not SZS.\n");
+            RIO_ASSERT(false);
+
+            if (src_need_delete)
+                rio::MemUtil::free(const_cast<u8*>(src));
+
+            return nullptr;
+        }
+        else
+        {
+            RIO_ASSERT(dst == nullptr);
+
+            if (out_size)
+                *out_size = src_size;
+
+            if (out_buffer_size)
+                *out_buffer_size = src_size;
+
+            if (out_need_delete)
+                *out_need_delete = src_need_delete;
+
+            return const_cast<u8*>(src);
+        }
+    }
 
     if (src_size < getHeaderSize())
     {
@@ -177,6 +213,16 @@ u8* SZSDecompressor::tryDecomp_(
         *out_need_delete = need_delete;
 
     return dst;
+}
+
+u32 SZSDecompressor::getMagic(const void* header)
+{
+    const u32* const ptr = static_cast<const u32*>(header);
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    return __builtin_bswap32(ptr[0]);
+#else
+    return ptr[0];
+#endif
 }
 
 u32 SZSDecompressor::getDecompAlignment(const void* header)
