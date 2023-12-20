@@ -105,7 +105,7 @@ public:
 
     std::vector<Entry> readEntry(u32 first = 0, u32 num = u32(-1)) const;
 
-    void* getFile(const char* file_path, u32* length = nullptr) const
+    const void* getFileConst(const char* file_path, u32* length = nullptr) const
     {
         FileInfo file_info;
         void* data = getFileImpl_(file_path, &file_info);
@@ -113,6 +113,11 @@ public:
             *length = file_info.getLength();
 
         return data;
+    }
+
+    void* getFileMutable(const char* file_path, u32* length = nullptr)
+    {
+        return const_cast<void*>(getFileConst(file_path, length));
     }
 
 private:

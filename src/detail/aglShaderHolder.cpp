@@ -57,11 +57,11 @@ void ShaderHolder::initialize(SharcArchiveRes* p_arc)
         const std::string arc_name(sProgramArchiveNames[itr_archive.getIndex()]);
 
         const std::string& sharc_name = arc_name + "." + ResShaderArchiveData::getExtension();
-        void* sharc = p_arc->getFile(sharc_name.c_str());
+        void* sharc = p_arc->getFileMutable(sharc_name.c_str());
 
 #if RIO_IS_CAFE
         const std::string& sharcfb_name = arc_name + "." + ResBinaryShaderArchiveData::getExtension();
-        void* sharcfb = p_arc->getFile(sharcfb_name.c_str());
+        void* sharcfb = p_arc->getFileMutable(sharcfb_name.c_str());
 #else
         void* sharcfb = nullptr;
 #endif
