@@ -78,8 +78,8 @@ class DepthOfField : public utl::IParameterIO
 
     struct VignettingShape
     {
-        VignettingShape();
-        ~VignettingShape();
+        VignettingShape() { }
+        ~VignettingShape() { }
 
         Buffer<Vertex> mVertex;
         Buffer<u16> mIndex;
@@ -131,6 +131,11 @@ public:
 public:
     DepthOfField();
     virtual ~DepthOfField();
+
+    DepthOfField(const DepthOfField&) = delete;
+    DepthOfField(DepthOfField&&) = delete;
+    DepthOfField& operator=(const DepthOfField&) = delete;
+    DepthOfField& operator=(DepthOfField&&) = delete;
 
     void initialize(s32 ctx_num = 1);
 

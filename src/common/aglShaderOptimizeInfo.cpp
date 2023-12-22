@@ -7,10 +7,6 @@ ShaderOptimizeInfo::ShaderOptimizeInfo()
     setDefault();
 }
 
-ShaderOptimizeInfo::~ShaderOptimizeInfo()
-{
-}
-
 void ShaderOptimizeInfo::setDefault()
 {
     mVertexShader.gprs = 48;

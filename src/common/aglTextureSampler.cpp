@@ -18,10 +18,6 @@ TextureSampler::TextureSampler(const TextureData& texture_data)
     applyTextureData(texture_data);
 }
 
-TextureSampler::~TextureSampler()
-{
-}
-
 void TextureSampler::applyTextureData_(const TextureData& texture_data)
 {
     mTextureData = texture_data;

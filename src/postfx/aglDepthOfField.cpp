@@ -1177,7 +1177,4 @@ DepthOfField::TempVignetting::TempVignetting(DepthOfField* p_dof, const char* pa
     p_dof->addObj(this, param_name);
 }
 
-DepthOfField::VignettingShape::VignettingShape() = default;
-DepthOfField::VignettingShape::~VignettingShape() = default;
-
 } }

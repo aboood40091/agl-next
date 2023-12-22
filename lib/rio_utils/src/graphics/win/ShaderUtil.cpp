@@ -485,10 +485,6 @@ struct ShaderCache
     {
     }
 
-    ~ShaderCache()
-    {
-    }
-
     std::string vertexShader;
     std::string fragmentShader;
 };

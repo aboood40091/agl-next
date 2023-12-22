@@ -57,6 +57,11 @@ public:
     VertexBuffer();
     virtual ~VertexBuffer();
 
+    VertexBuffer(const VertexBuffer&) = delete;
+    VertexBuffer(VertexBuffer&&) = delete;
+    VertexBuffer& operator=(const VertexBuffer&) = delete;
+    VertexBuffer& operator=(VertexBuffer&&) = delete;
+
     VertexStreamFormat getStreamFormat(s32 index) const { return mStream[index].mFormat; }
     u32 getStreamOffset(s32 index) const { return mStream[index].mOffset; }
 

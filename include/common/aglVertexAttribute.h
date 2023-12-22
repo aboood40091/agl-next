@@ -35,6 +35,11 @@ public:
     VertexAttribute();
     virtual ~VertexAttribute();
 
+    VertexAttribute(const VertexAttribute&) = delete;
+    VertexAttribute(VertexAttribute&&) = delete;
+    VertexAttribute& operator=(const VertexAttribute&) = delete;
+    VertexAttribute& operator=(VertexAttribute&&) = delete;
+
     void create(u32 buffer_max);
     void cleanUp();
     void destroy();

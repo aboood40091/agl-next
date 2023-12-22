@@ -44,6 +44,11 @@ class ShaderProgramArchive
         ShaderProgramEx();
         virtual ~ShaderProgramEx();
 
+        ShaderProgramEx(const ShaderProgramEx&) = delete;
+        ShaderProgramEx(ShaderProgramEx&&) = delete;
+        ShaderProgramEx& operator=(const ShaderProgramEx&) = delete;
+        ShaderProgramEx& operator=(ShaderProgramEx&&) = delete;
+
         void initialize(ShaderProgramArchive* archive, s32 index, ResShaderProgram res);
         void updateRawText();
         void updateAnalyze();
@@ -90,6 +95,11 @@ class ShaderProgramArchive
 public:
     ShaderProgramArchive();
     ~ShaderProgramArchive();
+
+    ShaderProgramArchive(const ShaderProgramArchive&) = delete;
+    ShaderProgramArchive(ShaderProgramArchive&&) = delete;
+    ShaderProgramArchive& operator=(const ShaderProgramArchive&) = delete;
+    ShaderProgramArchive& operator=(ShaderProgramArchive&&) = delete;
 
     void destroy();
 

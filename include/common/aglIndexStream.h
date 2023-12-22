@@ -14,6 +14,11 @@ public:
     IndexStream();
     virtual ~IndexStream();
 
+    IndexStream(const IndexStream&) = delete;
+    IndexStream(IndexStream&&) = delete;
+    IndexStream& operator=(const IndexStream&) = delete;
+    IndexStream& operator=(IndexStream&&) = delete;
+
     PrimitiveType getPrimitiveType() const { return mPrimitiveType; }
     void setPrimitiveType(PrimitiveType primitive_type) { mPrimitiveType = primitive_type; }
 

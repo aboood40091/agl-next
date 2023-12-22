@@ -22,6 +22,9 @@ public:
 private:
     static ShaderHolder* sInstance;
 
+    ShaderHolder();
+    ~ShaderHolder();
+
     ShaderHolder(const ShaderHolder&);
     ShaderHolder& operator=(const ShaderHolder&);
 
@@ -136,9 +139,6 @@ public:
     static_assert(cArchiveType_Num == 3);
 
 public:
-    ShaderHolder();
-    virtual ~ShaderHolder();
-
 #if RIO_IS_CAFE
     void setCreateDisplayLists(bool create)
     {

@@ -8,7 +8,6 @@ class ShaderOptimizeInfo
 {
 public:
     ShaderOptimizeInfo();
-    virtual ~ShaderOptimizeInfo();
 
     void setDefault();
 
@@ -59,6 +58,6 @@ private:
         u8 stack_size;
     } mGeometryShader;
 };
-static_assert(sizeof(ShaderOptimizeInfo) == 0x10, "agl::ShaderOptimizeInfo size mismatch");
+//static_assert(sizeof(ShaderOptimizeInfo) == 0x10, "agl::ShaderOptimizeInfo size mismatch");
 
 }

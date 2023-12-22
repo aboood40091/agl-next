@@ -18,7 +18,7 @@ class TextureSampler
 public:
     TextureSampler();
     TextureSampler(const TextureData& texture_data);
-    virtual ~TextureSampler();
+    ~TextureSampler() { }
 
     const TextureData& getTextureData() const { return mTextureData; }
     void applyTextureData(const TextureData& texture_data);

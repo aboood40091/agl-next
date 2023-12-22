@@ -37,6 +37,11 @@ public:
     ModelShaderAttribute();
     ~ModelShaderAttribute();
 
+    ModelShaderAttribute(const ModelShaderAttribute&) = delete;
+    ModelShaderAttribute(ModelShaderAttribute&&) = delete;
+    ModelShaderAttribute& operator=(const ModelShaderAttribute&) = delete;
+    ModelShaderAttribute& operator=(ModelShaderAttribute&&) = delete;
+
     void create();
     void clear();
 
@@ -61,7 +66,6 @@ class ModelShaderAssign
 {
 public:
     ModelShaderAssign();
-    ~ModelShaderAssign();
 
     const ShaderProgram* getShaderProgram() const { return mpProgram; }
 

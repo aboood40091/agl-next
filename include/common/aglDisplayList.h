@@ -21,6 +21,11 @@ public:
     DisplayList();
     virtual ~DisplayList();
 
+    DisplayList(const DisplayList&) = delete;
+    DisplayList(DisplayList&&) = delete;
+    DisplayList& operator=(const DisplayList&) = delete;
+    DisplayList& operator=(DisplayList&&) = delete;
+
     u8* getBuffer() const
     {
         return mpBuffer;

@@ -61,6 +61,11 @@ public:
     UniformBlock();
     virtual ~UniformBlock();
 
+    UniformBlock(const UniformBlock&) = delete;
+    UniformBlock(UniformBlock&&) = delete;
+    UniformBlock& operator=(const UniformBlock&) = delete;
+    UniformBlock& operator=(UniformBlock&&) = delete;
+
     void startDeclare(s32 num);
     void declare(Type type, s32 num);
     void declare(const UniformBlock& block);

@@ -14,7 +14,6 @@ class Shader
 {
 public:
     Shader();
-    virtual ~Shader() { }
 
     virtual ShaderType getShaderType() const = 0;
     virtual ShaderMode getShaderMode() const { return cShaderMode_Invalid; }

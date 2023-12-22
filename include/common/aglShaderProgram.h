@@ -33,6 +33,11 @@ public:
     ShaderProgram();
     virtual ~ShaderProgram();
 
+    ShaderProgram(const ShaderProgram&) = delete;
+    ShaderProgram(ShaderProgram&&) = delete;
+    ShaderProgram& operator=(const ShaderProgram&) = delete;
+    ShaderProgram& operator=(ShaderProgram&&) = delete;
+
     s32 getVariationID() const
     {
         return mVariationID;
@@ -271,6 +276,11 @@ private:
     {
         VariationBuffer();
         virtual ~VariationBuffer();
+
+        VariationBuffer(const VariationBuffer&) = delete;
+        VariationBuffer(VariationBuffer&&) = delete;
+        VariationBuffer& operator=(const VariationBuffer&) = delete;
+        VariationBuffer& operator=(VariationBuffer&&) = delete;
 
         void initialize(ShaderProgram* program, s32 macro_num);
 

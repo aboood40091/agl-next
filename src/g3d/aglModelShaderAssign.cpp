@@ -149,10 +149,6 @@ ModelShaderAssign::ModelShaderAssign()
     clear_();
 }
 
-ModelShaderAssign::~ModelShaderAssign()
-{
-}
-
 void ModelShaderAssign::create()
 {
     mAttribute.create();

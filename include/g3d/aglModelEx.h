@@ -47,6 +47,11 @@ public:
     ModelEx();
     virtual ~ModelEx();
 
+    ModelEx(const ModelEx&) = delete;
+    ModelEx(ModelEx&&) = delete;
+    ModelEx& operator=(const ModelEx&) = delete;
+    ModelEx& operator=(ModelEx&&) = delete;
+
     ModelShaderAssign& getShaderAssign(s32 index) const
     {
         return mpShaderAssign[index];
