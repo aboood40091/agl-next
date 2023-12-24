@@ -559,7 +559,7 @@ bool DepthOfField::enableSeparateVignettingPass_() const
     return false;
 }
 
-void DepthOfField::bindRenderBuffer_(RenderBuffer& render_buffer, s32 mip_level_color, s32 mip_level_depth) const
+void DepthOfField::bindRenderBuffer_(RenderBuffer& render_buffer, const rio::BaseVec2f& scissor_pos, const rio::BaseVec2f& scissor_size, s32 mip_level_color, s32 mip_level_depth) const
 {
     s32 w = -1;
     s32 h = -1;
@@ -589,6 +589,7 @@ void DepthOfField::bindRenderBuffer_(RenderBuffer& render_buffer, s32 mip_level_
     }
 
     render_buffer.setSize(w, h);
+    render_buffer.setScissor(scissor_pos, scissor_size);
 
     render_buffer.bind();
 }
@@ -669,7 +670,7 @@ ShaderMode DepthOfField::drawColorMipMap_(const DrawArg& arg, ShaderMode mode) c
         {
             if (enable_mip_from_zero_level)
             {
-                bindRenderBuffer_(render_buffer, 0, 0);
+                bindRenderBuffer_(render_buffer, arg.p_render_buffer->getScissorPos(), arg.p_render_buffer->getScissorSize(), 0, 0);
                 mode = utl::ImageFilter2D::drawTextureQuadTriangle(arg.p_ctx->mColorTargetTextureSampler, mode);
                 arg.p_ctx->mRenderBuffer.getRenderTargetColor()->invalidateGPUCache();
                 continue;
@@ -686,7 +687,7 @@ ShaderMode DepthOfField::drawColorMipMap_(const DrawArg& arg, ShaderMode mode) c
 
         p_program_mipmap->getUniformLocation(cUniform_TexParam).setVec4(param * _1ec);
 
-        bindRenderBuffer_(render_buffer, mip_level, 0);
+        bindRenderBuffer_(render_buffer, arg.p_render_buffer->getScissorPos(), arg.p_render_buffer->getScissorSize(), mip_level, 0);
         drawKick_(arg);
         arg.p_ctx->mRenderBuffer.getRenderTargetColor()->invalidateGPUCache();
     }
@@ -755,7 +756,7 @@ ShaderMode DepthOfField::drawDepthMipMap_(const DrawArg& arg, ShaderMode mode) c
 
         p_program_near_mask->getUniformLocation(cUniform_TexParam).setVec4(param * _1ec);
 
-        bindRenderBuffer_(render_buffer, 0, 0);
+        bindRenderBuffer_(render_buffer, arg.p_render_buffer->getScissorPos(), arg.p_render_buffer->getScissorSize(), 0, 0);
         drawKick_(arg);
         arg.p_ctx->mRenderBuffer.getRenderTargetColor()->invalidateGPUCache();
     }
@@ -780,7 +781,7 @@ ShaderMode DepthOfField::drawDepthMipMap_(const DrawArg& arg, ShaderMode mode) c
 
             p_program_mipmap->getUniformLocation(cUniform_TexParam).setVec4(param * _1ec);
 
-            bindRenderBuffer_(render_buffer, mip_level, 0);
+            bindRenderBuffer_(render_buffer, arg.p_render_buffer->getScissorPos(), arg.p_render_buffer->getScissorSize(), mip_level, 0);
             drawKick_(arg);
             arg.p_ctx->mRenderBuffer.getRenderTargetColor()->invalidateGPUCache();
         }
