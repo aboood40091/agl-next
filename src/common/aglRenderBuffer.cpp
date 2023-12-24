@@ -2,10 +2,14 @@
 #include <common/aglRenderTarget.h>
 #include <gfx/rio_Graphics.h>
 
+#include <cmath>
+
 namespace agl {
 
 RenderBuffer::RenderBuffer()
     : mSize{1, 1}
+    , mScissorPos{ 0.0f, 0.0f }
+    , mScissorSize{ 1.0f, 1.0f }
     , mColorTarget(nullptr)
     , mDepthTarget(nullptr)
 #if RIO_IS_WIN
@@ -14,8 +18,10 @@ RenderBuffer::RenderBuffer()
 {
 }
 
-RenderBuffer::RenderBuffer(const rio::Vector2i& size)
+RenderBuffer::RenderBuffer(const rio::BaseVec2i& size)
     : mSize{size}
+    , mScissorPos{ 0.0f, 0.0f }
+    , mScissorSize{ 1.0f, 1.0f }
     , mColorTarget(nullptr)
     , mDepthTarget(nullptr)
 #if RIO_IS_WIN
@@ -27,7 +33,13 @@ RenderBuffer::RenderBuffer(const rio::Vector2i& size)
 void RenderBuffer::bind() const
 {
     rio::Graphics::setViewport(0, 0, mSize.x, mSize.y, 0.0f, 1.0f, mSize.y);
-    rio::Graphics::setScissor(0, 0, mSize.x, mSize.y, mSize.y);
+    rio::Graphics::setScissor(
+        mScissorPos.x * mSize.x,
+        mScissorPos.y * mSize.y,
+        std::min<s32>(std::lround(mScissorSize.x * mSize.x), mSize.x),
+        std::min<s32>(std::lround(mScissorSize.y * mSize.y), mSize.y),
+        mSize.y
+    );
 
 #if RIO_IS_WIN
     mHandle->bind();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <math/rio_Vector.h>
+#include <math/rio_MathTypes.h>
 #if RIO_IS_WIN
 #include <misc/gl/rio_GL.h>
 
@@ -47,7 +47,7 @@ class RenderBuffer
 {
 public:
     RenderBuffer();
-    RenderBuffer(const rio::Vector2i& size);
+    RenderBuffer(const rio::BaseVec2i& size);
 
 public:
     RenderTargetColor* getRenderTargetColor() const
@@ -73,25 +73,62 @@ public:
     void setRenderTargetColorNull() { setRenderTargetColor(nullptr); }
     void setRenderTargetDepthNull() { setRenderTargetDepth(nullptr); }
 
-    const rio::Vector2i& getSize() const
+    const rio::BaseVec2i& getSize() const
     {
         return mSize;
     }
 
     void setSize(u32 w, u32 h)
     {
-        mSize.set(w, h);
+        mSize.x = w;
+        mSize.y = h;
+        resetScissor();
     }
 
-    void setSize(const rio::Vector2i& size)
+    void setSize(const rio::BaseVec2i& size)
     {
         mSize = size;
+        resetScissor();
+    }
+
+    const rio::BaseVec2f& getScissorPos() const
+    {
+        return mScissorPos;
+    }
+
+    const rio::BaseVec2f& getScissorSize() const
+    {
+        return mScissorSize;
+    }
+
+    void setScissor(f32 x, f32 y, f32 w, f32 h)
+    {
+        mScissorPos.x = x;
+        mScissorPos.y = y;
+        mScissorSize.x = w;
+        mScissorSize.y = h;
+    }
+
+    void setScissor(const rio::BaseVec2f& pos, const rio::BaseVec2f& size)
+    {
+        mScissorPos = pos;
+        mScissorSize = size;
+    }
+
+    void resetScissor()
+    {
+        mScissorPos.x = 0.0f;
+        mScissorPos.y = 0.0f;
+        mScissorSize.x = 1.0f;
+        mScissorSize.y = 1.0f;
     }
 
     void bind() const;
 
 private:
-    rio::Vector2i       mSize;
+    rio::BaseVec2i      mSize;
+    rio::BaseVec2f      mScissorPos;
+    rio::BaseVec2f      mScissorSize;
     RenderTargetColor*  mColorTarget;
     RenderTargetDepth*  mDepthTarget;
 #if RIO_IS_WIN
