@@ -90,7 +90,7 @@ void PrimitiveShape::setUpStreamQuad_()
     const u32 cIdxNum = 6;
     const u32 cIdxLineNum = 4;
 
-    mVtxQuad.allocBuffer(cVtxNum * sizeof(Vertex));
+    mVtxQuad.allocBuffer(cVtxNum);
     {
         UnsafeArray<Vertex, cVtxNum> vertices;
 
@@ -140,7 +140,7 @@ void PrimitiveShape::setUpStreamQuad_()
     mVtxBufferQuad.setUpBuffer(mVtxQuad.getBufferPtr(), sizeof(Vertex), cVtxNum * sizeof(Vertex));
     setUpStreams_(&mVtxBufferQuad);
 
-    mIdxQuad.allocBuffer(cIdxNum * sizeof(u32), rio::Drawer::cIdxAlignment);
+    mIdxQuad.allocBuffer(cIdxNum, rio::Drawer::cIdxAlignment);
     {
         UnsafeArray<u32, cIdxNum> indices;
 
@@ -156,7 +156,7 @@ void PrimitiveShape::setUpStreamQuad_()
     }
     mIdxStreamQuad.setUpStream(mIdxQuad.getBufferPtr(), cIdxNum);
 
-    mIdxLineQuad.allocBuffer(cIdxLineNum * sizeof(u32), rio::Drawer::cIdxAlignment);
+    mIdxLineQuad.allocBuffer(cIdxLineNum, rio::Drawer::cIdxAlignment);
     {
         UnsafeArray<u32, cIdxLineNum> indices;
 
@@ -179,7 +179,7 @@ void PrimitiveShape::setUpStreamQuadTriangle_()
     const u32 cIdxNum = 3;
     const u32 cIdxLineNum = 3;
 
-    mVtxQuadTriangle.allocBuffer(cVtxNum * sizeof(Vertex));
+    mVtxQuadTriangle.allocBuffer(cVtxNum);
     {
         UnsafeArray<Vertex, cVtxNum> vertices;
 
@@ -220,7 +220,7 @@ void PrimitiveShape::setUpStreamQuadTriangle_()
     mVtxBufferQuadTriangle.setUpBuffer(mVtxQuadTriangle.getBufferPtr(), sizeof(Vertex), cVtxNum * sizeof(Vertex));
     setUpStreams_(&mVtxBufferQuadTriangle);
 
-    mIdxQuadTriangle.allocBuffer(cIdxNum * sizeof(u32), rio::Drawer::cIdxAlignment);
+    mIdxQuadTriangle.allocBuffer(cIdxNum, rio::Drawer::cIdxAlignment);
     {
         UnsafeArray<u32, cIdxNum> indices;
 
@@ -233,7 +233,7 @@ void PrimitiveShape::setUpStreamQuadTriangle_()
     }
     mIdxStreamQuadTriangle.setUpStream(mIdxQuadTriangle.getBufferPtr(), cIdxNum);
 
-    mIdxLineQuadTriangle.allocBuffer(cIdxLineNum * sizeof(u32), rio::Drawer::cIdxAlignment);
+    mIdxLineQuadTriangle.allocBuffer(cIdxLineNum, rio::Drawer::cIdxAlignment);
     {
         UnsafeArray<u32, cIdxLineNum> indices;
 
