@@ -259,8 +259,8 @@ void ModelShaderAssign::activateTextureSampler(const nw::g3d::MaterialObj* p_mat
 {
     for (u32 i = 0; i < mSamplerNum; i++)
     {
-        const nw::g3d::res::ResSampler* p_res_sampler = mResSampler[i];
-        const nw::g3d::res::ResTexture* p_res_texture = p_material->GetResTexture(p_res_sampler->GetIndex());
+        const nw::g3d::res::ResSampler* const p_res_sampler = mResSampler[i];
+        const nw::g3d::res::ResTexture* const p_res_texture = p_material->GetResTexture(p_res_sampler->GetIndex());
 
         if (p_res_texture)
         {
@@ -271,20 +271,20 @@ void ModelShaderAssign::activateTextureSampler(const nw::g3d::MaterialObj* p_mat
 
             if (sampler_location.getVertexLocation() != -1)
             {
-                p_gfx_sampler->LoadVertexSampler(sampler_location.getVertexLocation());
-                p_gfx_texture->LoadVertexTexture(sampler_location.getVertexLocation());
+                p_gfx_sampler->LoadVertexSampler(sampler_location.getVertexLocation(), p_res_sampler->GetIndex());
+                p_gfx_texture->LoadVertexTexture(sampler_location.getVertexLocation(), p_res_sampler->GetIndex());
             }
 
             if (sampler_location.getGeometryLocation() != -1)
             {
-                p_gfx_sampler->LoadGeometrySampler(sampler_location.getGeometryLocation());
-                p_gfx_texture->LoadGeometryTexture(sampler_location.getGeometryLocation());
+                p_gfx_sampler->LoadGeometrySampler(sampler_location.getGeometryLocation(), p_res_sampler->GetIndex());
+                p_gfx_texture->LoadGeometryTexture(sampler_location.getGeometryLocation(), p_res_sampler->GetIndex());
             }
 
             if (sampler_location.getFragmentLocation() != -1)
             {
-                p_gfx_sampler->LoadFragmentSampler(sampler_location.getFragmentLocation());
-                p_gfx_texture->LoadFragmentTexture(sampler_location.getFragmentLocation());
+                p_gfx_sampler->LoadFragmentSampler(sampler_location.getFragmentLocation(), p_res_sampler->GetIndex());
+                p_gfx_texture->LoadFragmentTexture(sampler_location.getFragmentLocation(), p_res_sampler->GetIndex());
             }
         }
     }
