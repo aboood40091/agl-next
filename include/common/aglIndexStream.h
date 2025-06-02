@@ -52,7 +52,7 @@ public:
 
 #if RIO_IS_CAFE
         return static_cast<const u8*>(mpBuffer) + offset;
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
         return (void*)offset;
 #endif
     }
@@ -75,9 +75,9 @@ private:
     const void* mpBuffer;
     u32 mCount;
     u32 mStride;
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     u32 mHandle;
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 };
 //static_assert(sizeof(IndexStream) == 0x18, "agl::IndexStream size mismatch");
 

@@ -2,11 +2,11 @@
 #include <math/rio_Math.h>
 #include <utility/aglDynamicTextureAllocator.h>
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <common/aglTextureFormatInfo.h>
 
 #include <gpu/win/rio_Texture2DUtilWin.h>
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 namespace agl { namespace utl {
 
@@ -29,7 +29,7 @@ TextureData* DynamicTextureAllocator::alloc(
     else
         p_tex->setMipPtr(nullptr);
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
     const auto& handle = std::make_shared<TextureHandle>();
     handle->bind();
@@ -81,7 +81,7 @@ void DynamicTextureAllocator::free(const TextureData* ptr)
     p_tex->setImagePtr(nullptr);
     p_tex->setMipPtr(nullptr);
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
     p_tex->setHandle(nullptr);
 

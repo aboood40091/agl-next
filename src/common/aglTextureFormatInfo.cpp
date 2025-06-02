@@ -1306,7 +1306,7 @@ GX2SurfaceFormat TextureFormatInfo::convFormatAGLToGX2(TextureFormat format)
     return detail::TextureDataUtil::convFormatAGLToGX2(format);
 }
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 
 bool TextureFormatInfo::setNativeTextureFormat(rio::NativeTextureFormat* p_native_format, TextureFormat format)
 {
@@ -1671,6 +1671,6 @@ bool TextureFormatInfo::setNativeTextureFormat(rio::NativeTextureFormat* p_nativ
     }
 }
 
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 }

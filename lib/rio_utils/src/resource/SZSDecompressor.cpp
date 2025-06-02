@@ -164,7 +164,7 @@ u8* SZSDecompressor::tryDecomp_(
     {
         if (decomp_alignment && ((uintptr_t)dst & (decomp_alignment - 1u)))
         {
-#if !RIO_IS_WIN
+#if !RIO_IS_DESKTOP
             RIO_LOG("SZSDecompressor::tryDecomp_(): dst is not aligned with decomp_alignment[%d]\n", decomp_alignment);
             RIO_ASSERT(false);
 #endif

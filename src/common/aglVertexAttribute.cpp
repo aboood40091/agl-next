@@ -3,7 +3,7 @@
 
 #if RIO_IS_CAFE
 #include <coreinit/cache.h>
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 #include <misc/gl/rio_GL.h>
 #endif
 
@@ -14,7 +14,7 @@ VertexAttribute::VertexAttribute()
     , mCreateFinish(false)
 #if RIO_IS_CAFE
     , mpFetchShaderBuf(nullptr)
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     , mHandle(0)
 #endif
 {
@@ -32,7 +32,7 @@ void VertexAttribute::create(u32 buffer_max)
 
 #if RIO_IS_CAFE
     mpFetchShaderBuf = static_cast<u8*>(rio::MemUtil::alloc(GX2CalcFetchShaderSize(cVertexAttributeMax), GX2_SHADER_ALIGNMENT));
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     RIO_GL_CALL(glGenVertexArrays(1, &mHandle));
     RIO_ASSERT(mHandle != GL_NONE);
 #endif
@@ -66,7 +66,7 @@ void VertexAttribute::destroy()
         rio::MemUtil::free(mpFetchShaderBuf);
         mpFetchShaderBuf = nullptr;
     }
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     if (mHandle != GL_NONE)
     {
         RIO_GL_CALL(glDeleteVertexArrays(1, &mHandle));
@@ -163,7 +163,7 @@ void VertexAttribute::setUp()
     GX2InitFetchShader(&mFetchShader, mpFetchShaderBuf, stream_num, stream_array.getBufferPtr());
     DCFlushRangeNoSync(mpFetchShaderBuf, GX2CalcFetchShaderSize(stream_num));
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
     RIO_GL_CALL(glBindVertexArray(mHandle));
 
@@ -225,7 +225,7 @@ void VertexAttribute::activate() const
             GX2SetAttribBuffer(i, buffer->getBufferByteSize(), buffer->getStride(), buffer->getBufferPtr());
     }
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
     RIO_GL_CALL(glBindVertexArray(mHandle));
 

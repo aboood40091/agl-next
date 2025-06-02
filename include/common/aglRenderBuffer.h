@@ -1,15 +1,15 @@
 #pragma once
 
 #include <math/rio_MathTypes.h>
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <misc/gl/rio_GL.h>
 
 #include <memory>
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 namespace agl {
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 
 class RenderBufferHandle
 {
@@ -38,7 +38,7 @@ private:
     u32 mHandle;
 };
 
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 class RenderTargetColor;
 class RenderTargetDepth;
@@ -131,9 +131,9 @@ private:
     rio::BaseVec2f      mScissorSize;
     RenderTargetColor*  mColorTarget;
     RenderTargetDepth*  mDepthTarget;
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     std::unique_ptr<RenderBufferHandle> mHandle;
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 };
 //static_assert(sizeof(RenderBuffer) == 0x50, "agl::RenderBuffer size mistmatch");
 

@@ -7,10 +7,10 @@
 
 #include <cstring>
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <detail/aglShaderHolder.h>
 #include <graphics/win/ShaderUtil.h>
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 namespace agl {
 
@@ -35,10 +35,10 @@ ShaderProgram::ShaderProgram()
     , mFragmentShader()
     , mGeometryShader()
     , mpSharedData(nullptr)
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     , mVsCfileBlockIdx(-1)
     , mPsCfileBlockIdx(-1)
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 {
 }
 
@@ -112,7 +112,7 @@ ShaderMode ShaderProgram::activate(ShaderMode current_mode, bool use_dl) const
 
     if (current_mode == cShaderMode_GeometryShader)
         driver::GX2Resource::instance()->setGeometryShaderRingBuffer();
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     updateCompile();
 #endif
 
@@ -414,7 +414,7 @@ u32 ShaderProgram::forceValidate_() const
 
     setUpForVariation_();
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mFlag.isOn(1) && isUseBinaryProgram())
     {
         const GX2VertexShader* p_vertex_shader = getVertexShaderBinary();
@@ -454,7 +454,7 @@ u32 ShaderProgram::forceValidate_() const
             mPsCfileBlockIdx = -1;
     }
     else
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     if (mVertexShader.setUp(compile_source, mFlag.isOn(8)) != 0)
     {
         ret = 1;
@@ -471,7 +471,7 @@ u32 ShaderProgram::forceValidate_() const
     {
         if (mFlag.isOn(1))
         {
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
             mShader.unload();
 
             const ShaderCompileInfo* p_vert_compile_info = mVertexShader.getCompileInfo();
@@ -578,7 +578,7 @@ void ShaderProgram::setShaderGX2_() const
 
     if (mGeometryShader.getBinary())
         GX2SetGeometryShader(mGeometryShader.getBinary());
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     mShader.bind();
 
     mShader.setUniform(7u,      u32(-1), mShader.getFragmentUniformLocation("PS_PUSH.alphaFunc"));
