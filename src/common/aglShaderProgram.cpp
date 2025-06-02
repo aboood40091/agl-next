@@ -16,7 +16,9 @@ namespace agl {
 
 void ShaderProgram::changeShaderMode(ShaderMode mode)
 {
+#if RIO_IS_CAFE
     driver::GX2Resource::instance()->setShaderMode(mode);
+#endif // RIO_IS_CAFE
 }
 
 ShaderProgram::ShaderProgram()
