@@ -9,7 +9,7 @@
 
 namespace agl {
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 
 struct VertexStreamInternalFormat
 {
@@ -19,7 +19,7 @@ struct VertexStreamInternalFormat
     u32     type;
 };
 
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 class VertexBuffer
 {
@@ -42,7 +42,7 @@ class VertexBuffer
         u32 mDivisor;
         GX2EndianSwapMode mEndianSwap;
         GX2AttribIndexType mIndexType;
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
         VertexStreamInternalFormat mInternalFormat;
 #endif
     };
@@ -72,7 +72,7 @@ public:
     u32 getStreamDivisor(s32 index) const { return mStream[index].mDivisor; }
     GX2EndianSwapMode getStreamEndianSwap(s32 index) const { return mStream[index].mEndianSwap; }
     GX2AttribIndexType getStreamIndexType(s32 index) const { return mStream[index].mIndexType; }
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     const VertexStreamInternalFormat& getStreamInternalFormat(s32 index) const { return mStream[index].mInternalFormat; }
 #endif
 
@@ -81,9 +81,9 @@ public:
     u32 getVertexNum() const { return mVertexNum; }
     u32 getBufferByteSize() const { return mBufferByteSize; }
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     u32 getHandle() const { return mHandle; }
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     void setUpBuffer(const void* buffer, u32 stride, u32 buffer_byte_size);
     void setUpStream(s32 index, VertexStreamFormat format, u32 offset);
@@ -97,9 +97,9 @@ private:
     u32 mStride;
     u32 mVertexNum;
     u32 mBufferByteSize;
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     u32 mHandle;
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 };
 //static_assert(sizeof(VertexBuffer) == 0x1D4, "agl::VertexBuffer size mismatch");
 

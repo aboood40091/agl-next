@@ -3,9 +3,9 @@
 #include <detail/aglFileIOMgr.h>
 #include <detail/aglPrivateResource.h>
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <filedevice/rio_FileDeviceMgr.h>
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 namespace agl {
 
@@ -23,7 +23,7 @@ u32 Shader::setUp(bool compile_source, bool) const
     {
         std::string* temp_text = &detail::PrivateResource::sShaderText;
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
         mCompileInfo->calcCompileSource(getShaderType(), temp_text, ShaderCompileInfo::cTarget_GX2, true);
 #else
         mCompileInfo->calcCompileSource(getShaderType(), temp_text, ShaderCompileInfo::cTarget_GL, true);

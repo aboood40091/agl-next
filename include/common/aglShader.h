@@ -2,9 +2,9 @@
 
 #include <common/aglShaderEnum.h>
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 #include <cafe/gx2/gx2Shaders.h>
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
 namespace agl {
 
@@ -52,7 +52,7 @@ public:
         return cShaderType_Vertex;
     }
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
     GX2VertexShader* getBinary()
     {
         return static_cast<GX2VertexShader*>(Shader::getBinary());
@@ -67,7 +67,7 @@ public:
     {
         return ShaderMode(getBinary()->shaderMode);
     }
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 };
 
 class FragmentShader : public Shader
@@ -83,7 +83,7 @@ public:
         return cShaderType_Fragment;
     }
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
     GX2PixelShader* getBinary()
     {
         return static_cast<GX2PixelShader*>(Shader::getBinary());
@@ -98,7 +98,7 @@ public:
     {
         return ShaderMode(getBinary()->shaderMode);
     }
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 };
 
 class GeometryShader : public Shader
@@ -114,7 +114,7 @@ public:
         return cShaderType_Geometry;
     }
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
     GX2GeometryShader* getBinary()
     {
         return static_cast<GX2GeometryShader*>(Shader::getBinary());
@@ -129,7 +129,7 @@ public:
     {
         return ShaderMode(getBinary()->shaderMode);
     }
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 };
 
 }

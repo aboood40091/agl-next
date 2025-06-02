@@ -12,9 +12,9 @@ RenderBuffer::RenderBuffer()
     , mScissorSize{ 1.0f, 1.0f }
     , mColorTarget(nullptr)
     , mDepthTarget(nullptr)
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     , mHandle(std::make_unique<RenderBufferHandle>())
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 {
 }
 
@@ -24,9 +24,9 @@ RenderBuffer::RenderBuffer(const rio::BaseVec2i& size)
     , mScissorSize{ 1.0f, 1.0f }
     , mColorTarget(nullptr)
     , mDepthTarget(nullptr)
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     , mHandle(std::make_unique<RenderBufferHandle>())
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 {
 }
 
@@ -41,9 +41,9 @@ void RenderBuffer::bind() const
         mSize.y
     );
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     mHandle->bind();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     if (mColorTarget)
         mColorTarget->bind();

@@ -6,15 +6,15 @@
 #include <cafe/gx2/gx2Surface.h>
 
 #include <algorithm>
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <memory>
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 namespace agl {
 
 class TextureSampler;
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 
 class TextureHandle
 {
@@ -65,7 +65,7 @@ private:
     friend class TextureSampler;
 };
 
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 class RenderTargetColor;
 class RenderTargetDepth;
@@ -88,10 +88,10 @@ public:
     u32 getWidth(s32 mip_level = 0) const { return std::max<s32>(mSurface.width >> mip_level, mMinWidth); }
     u32 getHeight(s32 mip_level = 0) const { return std::max<s32>(mSurface.height >> mip_level, mMinHeight); }
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     const std::shared_ptr<TextureHandle>& getHandle() const { return mHandle; }
     void setHandle(const std::shared_ptr<TextureHandle>& handle) { mHandle = handle; }
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 #if RIO_IS_CAFE
     void* getImagePtr() const { return mSurface.image; }
@@ -111,9 +111,9 @@ public:
     u32 getAlignment() const { return mSurface.alignment; }
 #endif // RIO_IS_CAFE
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     const rio::NativeTextureFormat& getNativeTextureFormat() const { return mSurface.nativeFormat; }
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     const rio::NativeSurface2D& getSurface() const { return mSurface; }
 
@@ -152,9 +152,9 @@ public:
 private:
     TextureFormat mFormat;
     rio::NativeSurface2D mSurface;
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     std::shared_ptr<TextureHandle> mHandle;
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     u32 mMinWidth;
     u32 mMinHeight;
     u32 mMaxMipLevel;
@@ -189,9 +189,9 @@ TextureData::shareMemory(const TextureData& from)
     mSurface.image = from.mSurface.image;
     mSurface.mipmaps = from.mSurface.mipmaps;
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     mHandle = from.mHandle;
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 }
 
 inline u32

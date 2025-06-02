@@ -215,11 +215,11 @@ void ShaderProgramArchive::createWithOption(ResBinaryShaderArchive res_binary_ar
     for (Buffer<ShaderProgram>::iterator it = mProgram.begin(), it_end = mProgram.end(); it != it_end; ++it)
         it->reserveSetUpAllVariation();
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (!res_archive.isValid())
         for (Buffer<ShaderProgram>::iterator it = mProgram.begin(), it_end = mProgram.end(); it != it_end; ++it)
             it->setUseBinaryProgram(true);
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     if (mProgram.size() > 0)
         return;

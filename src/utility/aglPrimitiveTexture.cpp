@@ -133,7 +133,7 @@ void PrimitiveTexture::initialize()
 #if RIO_IS_CAFE
             texture_data.setImagePtr(image_ptr);
 #else
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
             const auto& handle = std::make_shared<TextureHandle>();
             handle->bind();
 
@@ -151,7 +151,7 @@ void PrimitiveTexture::initialize()
             ));
 
             texture_data.setHandle(handle);
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
             rio::MemUtil::free(image_ptr);
 #endif
 
