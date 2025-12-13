@@ -4,9 +4,9 @@
 #include <container/PtrArray.h>
 #include <container/SafeArray.h>
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <gpu/rio_UniformBlock.h>
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 class SharcArchiveRes;
 
@@ -164,7 +164,7 @@ private:
     UnsafeArray<ShaderProgramArchive, cArchiveType_Num> mProgramArchive;
 #if RIO_IS_CAFE
     bool mCreateDisplayLists;
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 public:
     class Cfile
     {

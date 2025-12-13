@@ -4,9 +4,9 @@
 #include <math/rio_Vector.h>
 #include <misc/rio_BitFlag.h>
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <gpu/rio_UniformBlock.h>
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 namespace agl {
 
@@ -122,10 +122,10 @@ private:
 
     Header* mpHeader;
     u8* mCurrentBuffer;
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     // Custom
     rio::UniformBlock* mpUBO;
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     u32 mBlockSize;
     rio::BitFlag8 mFlag;
 };

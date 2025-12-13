@@ -5,7 +5,7 @@
 
 #if RIO_IS_CAFE
 #include <cafe/gx2/gx2Shaders.h>
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 #include <misc/gl/rio_GL.h>
 void GX2SetVertexUniformReg(u32 offset, u32 count, const void* values);
 void GX2SetPixelUniformReg(u32 offset, u32 count, const void* values);
@@ -38,17 +38,17 @@ UniformLocation::setInt(s32 value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(s32), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -79,17 +79,17 @@ UniformLocation::setUInt(u32 value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(u32), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -120,17 +120,17 @@ UniformLocation::setFloat(f32 value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(f32), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -161,17 +161,17 @@ UniformLocation::setIVec2(const rio::BaseVec2i& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseVec2i), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -202,17 +202,17 @@ UniformLocation::setUVec2(const rio::BaseVec2u& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseVec2u), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -243,17 +243,17 @@ UniformLocation::setVec2(const rio::BaseVec2f& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseVec2f), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -284,17 +284,17 @@ UniformLocation::setIVec3(const rio::BaseVec3i& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseVec3i), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -325,17 +325,17 @@ UniformLocation::setUVec3(const rio::BaseVec3u& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseVec3u), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -366,17 +366,17 @@ UniformLocation::setVec3(const rio::BaseVec3f& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseVec3f), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -407,17 +407,17 @@ UniformLocation::setIVec4(const rio::BaseVec4i& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseVec4i), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -448,17 +448,17 @@ UniformLocation::setUVec4(const rio::BaseVec4u& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseVec4u), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -489,17 +489,17 @@ UniformLocation::setVec4(const rio::BaseVec4f& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseVec4f), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -536,17 +536,17 @@ UniformLocation::setVec4Array(const rio::BaseMtx34f& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseMtx34f), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -577,17 +577,17 @@ UniformLocation::setVec4Array(const rio::BaseMtx44f& value) const
 {
     RIO_ASSERT(mGS == -1);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseMtx44f), &value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -620,17 +620,17 @@ UniformLocation::setMtx43(const f32* value) const
 
     RIO_ASSERT(value);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseMtx34f), value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;
@@ -663,17 +663,17 @@ UniformLocation::setMtx44(const f32* value) const
 
     RIO_ASSERT(value);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
     setUniform(*this, sizeof(rio::BaseMtx44f), value);
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
 
     s32 location;

@@ -5,9 +5,9 @@
 
 #include <cstring>
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 #include <cafe/gx2/gx2Shaders.h>
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
 static inline void swap32(void* ptr, size_t size)
 {
@@ -34,7 +34,7 @@ void modifyEndianResSymbolArray(bool is_le, agl::ResShaderSymbolArray symbol_arr
             agl::ModifyEndianU32(is_le, agl::ResShaderSymbol(&(*it)).getDefaultValue(), it->mDefaultValueSize);
 }
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
 template <typename T>
 T* modifyBinaryAndNamePtr(void* base_ptr, T* ptr, s32 num)
@@ -55,7 +55,7 @@ void* modifyBinaryPtr(void* base_ptr, void* ptr)
     return (void*)(uintptr_t(base_ptr) + uintptr_t(ptr));
 }
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
 }
 
@@ -66,7 +66,7 @@ void ResShaderBinary::modifyBinaryEndian()
     size_t size = 0;
     void* data = nullptr;
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
     switch (getShaderType())
     {
     case cShaderType_Vertex:
@@ -134,14 +134,14 @@ void ResShaderBinary::modifyBinaryEndian()
     default:
         break;
     }
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
     swap32(data, size);
 }
 
 void ResShaderBinary::setUp()
 {
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
     switch (getShaderType())
     {
     case cShaderType_Vertex:
@@ -210,7 +210,7 @@ void ResShaderBinary::setUp()
     default:
         break;
     }
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 }
 
 const char* ResShaderVariation::getID() const

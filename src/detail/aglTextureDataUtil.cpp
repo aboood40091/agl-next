@@ -4,9 +4,9 @@
 
 #include <cafe/gx2/gx2Enum.h>
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <misc/rio_MemUtil.h>
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 namespace agl { namespace detail {
 
@@ -117,7 +117,7 @@ void TextureDataUtil::calcSizeAndAlignment(rio::NativeSurface2D* p_surface)
 
     GX2CalcSurfaceSizeAndAlignment(p_surface);
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
     GX2Surface surface;
     rio::MemUtil::set(&surface, 0, sizeof(GX2Surface));

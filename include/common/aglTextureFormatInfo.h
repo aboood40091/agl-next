@@ -26,9 +26,9 @@ public:
     static TextureFormat convFormatGX2ToAGL(GX2SurfaceFormat format, bool color_target, bool depth_target);
     static GX2SurfaceFormat convFormatAGLToGX2(TextureFormat format);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     static bool setNativeTextureFormat(rio::NativeTextureFormat* p_native_format, TextureFormat format);
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 };
 
 }

@@ -66,7 +66,7 @@ GX2GetGeometryUniformVarOffset(const GX2GeometryShader* shader,
 
 }
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
 #include <detail/aglShaderHolder.h>
 
@@ -190,21 +190,21 @@ namespace agl {
 
 void UniformLocation::search(const ShaderProgram& program)
 {
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     mBinary = program.isUseBinaryProgram();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     mVS = -1;
     mFS = -1;
     mGS = -1;
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     const rio::Shader* p_shader_rio = program.getShaderRIO();
     RIO_ASSERT(p_shader_rio);
     if (mBinary) {
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     if (program.getVertexShaderBinary())
         mVS = GX2GetVertexUniformVarOffset(program.getVertexShaderBinary(), getName());
@@ -215,21 +215,21 @@ void UniformLocation::search(const ShaderProgram& program)
     if (program.getGeometryShaderBinary())
         mGS = GX2GetGeometryUniformVarOffset(program.getGeometryShaderBinary(), getName());
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     } else {
         mVS = p_shader_rio->getVertexUniformLocation(getName());
         mFS = p_shader_rio->getFragmentUniformLocation(getName());
     }
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 }
 
 void UniformBlockLocation::search(const ShaderProgram& program)
 {
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     mBinary = program.isUseBinaryProgram();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     mVS = -1;
     mFS = -1;
@@ -257,7 +257,7 @@ void UniformBlockLocation::search(const ShaderProgram& program)
         if (uniform_block)
             mGS = uniform_block->offset;
     }
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     const rio::Shader* p_shader_rio = program.getShaderRIO();
     RIO_ASSERT(p_shader_rio);
     mVS = p_shader_rio->getVertexUniformBlockIndex(getName());
@@ -268,9 +268,9 @@ void UniformBlockLocation::search(const ShaderProgram& program)
 
 void SamplerLocation::search(const ShaderProgram& program)
 {
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     mBinary = program.isUseBinaryProgram();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     mVS = -1;
     mFS = -1;
@@ -298,7 +298,7 @@ void SamplerLocation::search(const ShaderProgram& program)
         if (sampler_var)
             mGS = sampler_var->location;
     }
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     const rio::Shader* p_shader_rio = program.getShaderRIO();
     RIO_ASSERT(p_shader_rio);
     mVS = p_shader_rio->getVertexSamplerLocation(getName());
@@ -309,16 +309,16 @@ void SamplerLocation::search(const ShaderProgram& program)
 
 void AttributeLocation::search(const ShaderProgram& program)
 {
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     mBinary = program.isUseBinaryProgram();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 #if RIO_IS_CAFE
     // if (program.getVertexShaderBinary())
         mVS = GX2GetVertexAttribVarLocation(program.getVertexShaderBinary(), getName());
     // else
     //     mVS = -1;
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     const rio::Shader* p_shader_rio = program.getShaderRIO();
     RIO_ASSERT(p_shader_rio);
     if (mBinary)

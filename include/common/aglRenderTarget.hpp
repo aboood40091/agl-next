@@ -52,7 +52,7 @@ RenderTargetColor::bind() const
 
 #if RIO_IS_CAFE
     GX2SetColorBuffer(&mInnerBuffer, GX2_RENDER_TARGET_0);
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     const std::shared_ptr<TextureHandle>& handle = mTextureData.getHandle();
     RIO_ASSERT(handle);
     handle->bindTarget(GL_COLOR_ATTACHMENT0, GL_FRAMEBUFFER, mMipLevel);
@@ -70,7 +70,7 @@ RenderTargetDepth::bind() const
 
 #if RIO_IS_CAFE
     GX2SetDepthBuffer(&mInnerBuffer);
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     const std::shared_ptr<TextureHandle>& handle = mTextureData.getHandle();
     RIO_ASSERT(handle);
     handle->bindTarget(

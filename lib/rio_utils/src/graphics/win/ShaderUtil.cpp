@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <graphics/win/ShaderUtil.h>
 #include <misc/MD5.h>
 
@@ -5,17 +6,13 @@
 
 #include <cafe/gfd.h>
 
-#define WIN32_LEAN_AND_MEAN
-#ifndef NOMINMAX
-    #define NOMINMAX
-#endif // NOMINMAX
-#include <windows.h>
-
 #include <array>
 #include <algorithm>
 #include <fstream>
 #include <sstream>
+#include <system_error>
 #include <unordered_map>
+#include <filesystem>
 
 #ifdef RIO_DEBUG
 
@@ -37,30 +34,25 @@ namespace {
 
 bool FileExists(const char* path)
 {
-    DWORD dwAttrib = GetFileAttributes(path);
-    return dwAttrib != INVALID_FILE_ATTRIBUTES && !(dwAttrib & FILE_ATTRIBUTE_DIRECTORY);
+    std::error_code ec;
+    return std::filesystem::is_regular_file(path, ec) && !ec;
 }
 
 bool FolderExists(const char* path)
 {
-    DWORD dwAttrib = GetFileAttributes(path);
-    return dwAttrib != INVALID_FILE_ATTRIBUTES && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY);
+    std::error_code ec;
+    return std::filesystem::is_directory(path, ec) && !ec;
 }
 
 void RunCommand(const char* cmd)
 {
-    STARTUPINFOA si = { sizeof(STARTUPINFOA), 0 };
-    si.dwFlags = STARTF_USESHOWWINDOW;
-    si.wShowWindow = SW_HIDE;
+    std::system(cmd);
+}
 
-    PROCESS_INFORMATION pi = { 0 };
-
-    if (CreateProcessA(NULL, const_cast<char*>(cmd), NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi))
-    {
-        WaitForSingleObject(pi.hProcess, INFINITE);
-        CloseHandle(pi.hThread);
-        CloseHandle(pi.hProcess);
-    }
+bool DeleteFile(const char* path)
+{
+    std::error_code ec;
+    return std::filesystem::remove(path, ec);
 }
 
 bool WriteFile(const char* filename, const u8* data, u32 size)

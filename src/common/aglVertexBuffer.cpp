@@ -2,7 +2,7 @@
 
 #if RIO_IS_CAFE
 #include <coreinit/cache.h>
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 #include <misc/gl/rio_GL.h>
 #endif
 
@@ -13,9 +13,9 @@ VertexBuffer::VertexBuffer()
     , mStride(0)
     , mVertexNum(0)
     , mBufferByteSize(0)
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     , mHandle(GL_NONE)
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 {
 }
 
@@ -34,13 +34,13 @@ void VertexBuffer::cleanUp_()
     mStride = 0;
     mVertexNum = 0;
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     if (mHandle != GL_NONE)
     {
         RIO_GL_CALL(glDeleteBuffers(1, &mHandle));
         mHandle = GL_NONE;
     }
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 }
 
 void VertexBuffer::setUpBuffer(const void* buffer, u32 stride, u32 buffer_byte_size)
@@ -68,7 +68,7 @@ void VertexBuffer::setUpBuffer(const void* buffer, u32 stride, u32 buffer_byte_s
 
 #if RIO_IS_CAFE
     DCFlushRangeNoSync(const_cast<void*>(mpBuffer), mBufferByteSize);
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     RIO_GL_CALL(glGenBuffers(1, &mHandle));
     RIO_ASSERT(mHandle != GL_NONE);
     RIO_GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, mHandle));
@@ -102,7 +102,7 @@ void VertexBuffer::setUpStream(s32 index, VertexStreamFormat format, u32 offset)
     mStream[index].mEndianSwap = GX2_ENDIANSWAP_DEFAULT;
     mStream[index].mIndexType = GX2_ATTRIB_INDEX_VERTEX_ID;
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
     switch (format)
     {

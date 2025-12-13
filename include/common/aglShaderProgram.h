@@ -10,10 +10,10 @@
 #include <misc/rio_BitFlag.h>
 #include <misc/Namable.h>
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <gpu/rio_Shader.h>
 #include <cafe/gfd.h>
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 #include <string>
 #include <unordered_map>
@@ -91,69 +91,69 @@ public:
     Shader* getShader(ShaderType type);
     const Shader* getShader(ShaderType type) const;
 
-#if RIO_IS_CAFE || RIO_IS_WIN
+#if RIO_IS_CAFE || RIO_IS_DESKTOP
     GX2VertexShader* getVertexShaderBinary()
     {
         validate_();
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         return isUseBinaryProgram() ? mVertexShader.getBinary() : nullptr;
 #else
         return mVertexShader.getBinary();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     }
 
     const GX2VertexShader* getVertexShaderBinary() const
     {
         validate_();
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         return isUseBinaryProgram() ? mVertexShader.getBinary() : nullptr;
 #else
         return mVertexShader.getBinary();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     }
 
     GX2PixelShader* getFragmentShaderBinary()
     {
         validate_();
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         return isUseBinaryProgram() ? mFragmentShader.getBinary() : nullptr;
 #else
         return mFragmentShader.getBinary();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     }
 
     const GX2PixelShader* getFragmentShaderBinary() const
     {
         validate_();
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         return isUseBinaryProgram() ? mFragmentShader.getBinary() : nullptr;
 #else
         return mFragmentShader.getBinary();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     }
 
     GX2GeometryShader* getGeometryShaderBinary()
     {
         validate_();
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         return isUseBinaryProgram() ? mGeometryShader.getBinary() : nullptr;
 #else
         return mGeometryShader.getBinary();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     }
 
     const GX2GeometryShader* getGeometryShaderBinary() const
     {
         validate_();
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         return isUseBinaryProgram() ? mGeometryShader.getBinary() : nullptr;
 #else
         return mGeometryShader.getBinary();
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     }
-#endif // RIO_IS_CAFE || RIO_IS_WIN
+#endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     rio::Shader* getShaderRIO()
     {
         updateCompile();
@@ -189,7 +189,7 @@ public:
 
         return validate_();
     }
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     void createAttribute(s32 num);
     void setAttributeName(s32 index, const char* name);
@@ -236,7 +236,7 @@ public:
     const UniformBlockLocation& getUniformBlockLocation(s32 index) const { return mUniformBlockLocation[index]; }
     const SamplerLocation& getSamplerLocation(s32 index) const { return mSamplerLocation[index]; }
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     const AttributeLocation& getAttributeLocationValidate(s32 index) const { updateCompile(); return mAttributeLocation[index]; }
     const UniformLocation& getUniformLocationValidate(s32 index) const { updateCompile(); return mUniformLocation[index]; }
     const UniformBlockLocation& getUniformBlockLocationValidate(s32 index) const { updateCompile(); return mUniformBlockLocation[index]; }
@@ -246,7 +246,7 @@ public:
     const UniformLocation& getUniformLocationValidate(s32 index) const { validate_(); return mUniformLocation[index]; }
     const UniformBlockLocation& getUniformBlockLocationValidate(s32 index) const { validate_(); return mUniformBlockLocation[index]; }
     const SamplerLocation& getSamplerLocationValidate(s32 index) const { validate_(); return mSamplerLocation[index]; }
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     void updateAttributeLocation() const;
     void updateUniformLocation() const;
@@ -355,12 +355,12 @@ private:
     GeometryShader mGeometryShader;
     SharedData* mpSharedData;
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     // Custom
     mutable rio::Shader mShader;
     mutable s32 mVsCfileBlockIdx;
     mutable s32 mPsCfileBlockIdx;
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 };
 //static_assert(sizeof(ShaderProgram) == 0x60, "agl::ShaderProgram size mismatch");
 

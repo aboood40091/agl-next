@@ -37,7 +37,7 @@ void TextureSampler::applyTextureData_(const TextureData& texture_data)
 
     mSamplerInner.linkNativeTexture2D(&mGX2Texture);
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
     const std::shared_ptr<TextureHandle>& handle = mTextureData.getHandle();
     RIO_ASSERT(handle);

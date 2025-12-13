@@ -3,7 +3,7 @@
 #include <detail/aglTextureDataUtil.h>
 #include <misc/rio_MemUtil.h>
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <gpu/win/rio_Texture2DUtilWin.h>
 #elif RIO_IS_CAFE
 #include <gx2/mem.h>
@@ -26,9 +26,9 @@ TextureData::TextureData()
 TextureData::TextureData(const rio::Texture2D& texture, bool color_target, bool depth_target)
     : mFormat(detail::TextureDataUtil::convFormatGX2ToAGL(GX2SurfaceFormat(texture.getTextureFormat()), color_target, depth_target))
     , mSurface(texture.getNativeTexture().surface)
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     , mHandle(std::make_shared<TextureHandle>(texture.getNativeTextureHandle()))
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 {
     mCompR = TextureCompSel(texture.getNativeTexture().compMap >> 24 & 0xFF);
     mCompG = TextureCompSel(texture.getNativeTexture().compMap >> 16 & 0xFF);
@@ -44,7 +44,7 @@ void TextureData::setMipLevelNum(u32 mip_level_num)
     mSurface.mipLevels = std::clamp<s32>(mip_level_num, 1, mMaxMipLevel);
     detail::TextureDataUtil::calcSizeAndAlignment(&mSurface);
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 
     if (mHandle)
     {
@@ -52,7 +52,7 @@ void TextureData::setMipLevelNum(u32 mip_level_num)
         RIO_GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, mSurface.mipLevels - 1));
     }
 
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 }
 
 void TextureData::invalidateGPUCache() const
@@ -68,10 +68,10 @@ void TextureData::invalidateGPUCache() const
 
 void TextureData::initialize(TextureFormat format, u32 width, u32 height, u32 mip_level_num)
 {
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     RIO_ASSERT(!mHandle);
   //RIO_ASSERT(format != cTextureFormat_Depth_24_uNorm_Stencil_8);
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     mFormat = format;
     GX2SurfaceFormat surface_format = detail::TextureDataUtil::convFormatAGLToGX2(format);
@@ -91,7 +91,7 @@ void TextureData::initialize(TextureFormat format, u32 width, u32 height, u32 mi
     mSurface.tileMode = GX2_TILE_MODE_DEFAULT;
     mSurface.swizzle = 0;
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
     mSurface.format = static_cast<rio::TextureFormat>(surface_format);
 
@@ -153,7 +153,7 @@ void TextureData::initializeFromSurface(const GX2Surface& surface)
 
     mSurface = surface;
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
     RIO_ASSERT(!mHandle);
     RIO_ASSERT(surface.tileMode == GX2_TILE_MODE_LINEAR_SPECIAL);

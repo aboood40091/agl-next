@@ -13,9 +13,9 @@ public:
         : mVS(-1)
         , mFS(-1)
         , mGS(-1)
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         , mBinary(false)
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     {
     }
 
@@ -34,13 +34,13 @@ protected:
     s16 mVS;
     s16 mFS;
     s16 mGS;
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     bool mBinary;
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 };
 static_assert(
     sizeof(ShaderLocation) ==
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         8,
 #else
         6,
@@ -173,27 +173,27 @@ public:
     AttributeLocation()
         : INamable("Undefined")
         , mVS() // Nintendo mistakingly didn't set this to -1
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         , mBinary(false)
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     {
     }
 
     explicit AttributeLocation(const char* name)
         : INamable(name)
         , mVS() // I don't actually know if this is set here
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         , mBinary(false)
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     {
     }
 
     AttributeLocation(const char* name, const ShaderProgram& program)
         : INamable(name)
       //, mVS() // Set by search()
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
       //, mBinary(false) // Set by search()
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     {
         search(program);
     }
@@ -209,9 +209,9 @@ public:
 
 private:
     s16 mVS;
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     bool mBinary;
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 };
 static_assert(sizeof(AttributeLocation) == 0xC, "agl::AttributeLocation size mismatch");
 

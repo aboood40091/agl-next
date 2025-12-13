@@ -61,7 +61,7 @@ private:
 #if RIO_IS_CAFE
     GX2FetchShader mFetchShader;
     u8* mpFetchShaderBuf;
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     u32 mHandle;
 #endif
 };

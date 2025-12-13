@@ -38,9 +38,9 @@ namespace agl {
 UniformBlock::UniformBlock()
     : mpHeader(nullptr)
     , mCurrentBuffer(nullptr)
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     , mpUBO(nullptr)
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     , mBlockSize(0)
     , mFlag(0)
 {
@@ -108,9 +108,9 @@ void UniformBlock::declare(const UniformBlock& block)
 void UniformBlock::create()
 {
     RIO_ASSERT(mCurrentBuffer == nullptr);
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     RIO_ASSERT(mpUBO == nullptr);
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     if (mFlag.isOn(cFlag_OwnBuffer))
     {
@@ -120,9 +120,9 @@ void UniformBlock::create()
 
     mBlockSize = ROUNDUP(mBlockSize, cCPUCacheLineSize);
     mCurrentBuffer = static_cast<u8*>(rio::MemUtil::alloc(mBlockSize, cUniformBlockAlignment));
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     mpUBO = new rio::UniformBlock(mCurrentBuffer, mBlockSize);
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
     mFlag.set(cFlag_OwnBuffer);
 }
@@ -136,20 +136,20 @@ void UniformBlock::destroy()
             rio::MemUtil::free(mCurrentBuffer);
             mCurrentBuffer = nullptr;
         }
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
         if (mpUBO)
         {
             delete mpUBO;
             mpUBO = nullptr;
         }
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
         mFlag.reset(cFlag_OwnBuffer);
     }
 
     mCurrentBuffer = nullptr;
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     mpUBO = nullptr;
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
     mBlockSize = 0;
 
     if (mFlag.isOn(cFlag_OwnHeader))
@@ -174,9 +174,9 @@ void UniformBlock::dcbz() const
     }
 #else
     rio::MemUtil::set(mCurrentBuffer, 0, mBlockSize);
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     mpUBO->setData(mCurrentBuffer, mBlockSize);
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 #endif
 }
 
@@ -186,7 +186,7 @@ void UniformBlock::flush(void* p_memory, bool invalidate_gpu) const
     DCFlushRange(p_memory, mBlockSize);
     if (invalidate_gpu)
         GX2Invalidate(GX2_INVALIDATE_UNIFORM_BLOCK, p_memory, mBlockSize);
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     RIO_ASSERT(p_memory == mCurrentBuffer);
     mpUBO->setData(mCurrentBuffer, mBlockSize);
 #endif
@@ -210,7 +210,7 @@ bool UniformBlock::setUniform(const void* p_data, const UniformBlockLocation& lo
         GX2SetGeometryUniformBlock(location.getGeometryLocation(), size, ptr);
 
     return true;
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
     RIO_ASSERT(p_data == mCurrentBuffer && offset == 0);
     RIO_ASSERT(location.getGeometryLocation() == -1);
 

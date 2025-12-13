@@ -1,8 +1,8 @@
 #pragma once
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #include <gpu/win/rio_Texture2DUtilWin.h>
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 namespace agl {
 
@@ -34,7 +34,7 @@ TextureSampler::applyTextureData(const TextureData& texture_data)
 
     mSamplerInner.linkNativeTexture2D(&mGX2Texture);
 
-#elif RIO_IS_WIN
+#elif RIO_IS_DESKTOP
 
     const std::shared_ptr<TextureHandle>& handle = mTextureData.getHandle();
     RIO_ASSERT(handle);
