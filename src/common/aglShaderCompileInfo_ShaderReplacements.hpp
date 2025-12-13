@@ -4,14 +4,14 @@
 
 namespace {
 
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
 #define STRING_REPLACEMENT_COUNT 2
 #else
 #define STRING_REPLACEMENT_COUNT 0
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 
 static const std::string cStringReplacement_From[STRING_REPLACEMENT_COUNT] = {
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     // (NSMBU) wii_pipeline_fs.sh (new)
     "//------------------------------------------------------------------------------\n"
     "/** @file   wii_pipleline_fs.sh\n"
@@ -1276,11 +1276,11 @@ static const std::string cStringReplacement_From[STRING_REPLACEMENT_COUNT] = {
     "\n"
     "\n"
     "\x00"
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 };
 
 static const std::string cStringReplacement_To[STRING_REPLACEMENT_COUNT] = {
-#if RIO_IS_WIN
+#if RIO_IS_DESKTOP
     // (NSMBU) wii_pipeline_fs.sh (new)
     "//------------------------------------------------------------------------------\n"
     "/** @file   wii_pipleline_fs.sh\n"
@@ -2707,7 +2707,7 @@ static const std::string cStringReplacement_To[STRING_REPLACEMENT_COUNT] = {
     "\n"
     "\n"
     "\x00"
-#endif // RIO_IS_WIN
+#endif // RIO_IS_DESKTOP
 };
 
 }
