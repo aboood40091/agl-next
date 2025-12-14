@@ -1,8 +1,5 @@
 #pragma once
 
-// TODO: Move to the proper header
-#define SEAD_MACRO_UTIL_ROUNDUP(x, y) (((x) + ((y) - 1)) & ~((y) - 1))
-
 #if RIO_IS_CAFE
 #include <cafe/gx2/gx2Shaders.h>
 #elif RIO_IS_DESKTOP
@@ -18,11 +15,13 @@ namespace {
 inline void
 setUniform(const UniformLocation& location, u32 size, const void* buffer)
 {
+    RIO_ASSERT(size % sizeof(rio::BaseVec4u) == 0); // Ensure proper alignment
+
     if (location.getVertexLocation() != -1)
-        GX2SetVertexUniformReg(location.getVertexLocation(), SEAD_MACRO_UTIL_ROUNDUP(size, sizeof(rio::BaseVec4u)) / sizeof(u32), buffer);
+        GX2SetVertexUniformReg(location.getVertexLocation(), size / sizeof(u32), buffer);
 
     if (location.getFragmentLocation() != -1)
-        GX2SetPixelUniformReg(location.getFragmentLocation(), SEAD_MACRO_UTIL_ROUNDUP(size, sizeof(rio::BaseVec4u)) / sizeof(u32), buffer);
+        GX2SetPixelUniformReg(location.getFragmentLocation(), size / sizeof(u32), buffer);
 }
 
 }
@@ -44,7 +43,8 @@ UniformLocation::setInt(s32 value) const
 
 #if RIO_IS_CAFE || RIO_IS_DESKTOP
 
-    setUniform(*this, sizeof(s32), &value);
+    rio::BaseVec4i v = { value, 0, 0, 0 };
+    setUniform(*this, sizeof(v), &v);
 
 #endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
@@ -85,7 +85,8 @@ UniformLocation::setUInt(u32 value) const
 
 #if RIO_IS_CAFE || RIO_IS_DESKTOP
 
-    setUniform(*this, sizeof(u32), &value);
+    rio::BaseVec4u v = { value, 0, 0, 0 };
+    setUniform(*this, sizeof(v), &v);
 
 #endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
@@ -126,7 +127,8 @@ UniformLocation::setFloat(f32 value) const
 
 #if RIO_IS_CAFE || RIO_IS_DESKTOP
 
-    setUniform(*this, sizeof(f32), &value);
+    rio::BaseVec4f v = { value, 0.0f, 0.0f, 0.0f };
+    setUniform(*this, sizeof(v), &v);
 
 #endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
@@ -167,7 +169,8 @@ UniformLocation::setIVec2(const rio::BaseVec2i& value) const
 
 #if RIO_IS_CAFE || RIO_IS_DESKTOP
 
-    setUniform(*this, sizeof(rio::BaseVec2i), &value);
+    rio::BaseVec4i v = { value.x, value.y, 0, 0 };
+    setUniform(*this, sizeof(v), &v);
 
 #endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
@@ -208,7 +211,8 @@ UniformLocation::setUVec2(const rio::BaseVec2u& value) const
 
 #if RIO_IS_CAFE || RIO_IS_DESKTOP
 
-    setUniform(*this, sizeof(rio::BaseVec2u), &value);
+    rio::BaseVec4u v = { value.x, value.y, 0, 0 };
+    setUniform(*this, sizeof(v), &v);
 
 #endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
@@ -249,7 +253,8 @@ UniformLocation::setVec2(const rio::BaseVec2f& value) const
 
 #if RIO_IS_CAFE || RIO_IS_DESKTOP
 
-    setUniform(*this, sizeof(rio::BaseVec2f), &value);
+    rio::BaseVec4f v = { value.x, value.y, 0.0f, 0.0f };
+    setUniform(*this, sizeof(v), &v);
 
 #endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
@@ -290,7 +295,8 @@ UniformLocation::setIVec3(const rio::BaseVec3i& value) const
 
 #if RIO_IS_CAFE || RIO_IS_DESKTOP
 
-    setUniform(*this, sizeof(rio::BaseVec3i), &value);
+    rio::BaseVec4i v = { value.x, value.y, value.z, 0 };
+    setUniform(*this, sizeof(v), &v);
 
 #endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
@@ -331,7 +337,8 @@ UniformLocation::setUVec3(const rio::BaseVec3u& value) const
 
 #if RIO_IS_CAFE || RIO_IS_DESKTOP
 
-    setUniform(*this, sizeof(rio::BaseVec3u), &value);
+    rio::BaseVec4u v = { value.x, value.y, value.z, 0 };
+    setUniform(*this, sizeof(v), &v);
 
 #endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
@@ -372,7 +379,8 @@ UniformLocation::setVec3(const rio::BaseVec3f& value) const
 
 #if RIO_IS_CAFE || RIO_IS_DESKTOP
 
-    setUniform(*this, sizeof(rio::BaseVec3f), &value);
+    rio::BaseVec4f v = { value.x, value.y, value.z, 0.0f };
+    setUniform(*this, sizeof(v), &v);
 
 #endif // RIO_IS_CAFE || RIO_IS_DESKTOP
 
