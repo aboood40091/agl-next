@@ -10,6 +10,3 @@
 	path = lib/ninTexUtils
 	url = https://github.com/aboood40091/ninTexUtils
 	branch = cpp
-[submodule "lib/gsl"]
-	path = lib/gsl
-	url = https://github.com/microsoft/GSL
