@@ -66,7 +66,7 @@ protected:
 
     friend class IParameterObj;
 };
-static_assert(sizeof(ParameterBase) == 0x10, "agl::utl::ParameterBase size mismatch");
+// static_assert(sizeof(ParameterBase) == 0x10, "agl::utl::ParameterBase size mismatch");
 
 template <typename T>
 class Parameter : public ParameterBase

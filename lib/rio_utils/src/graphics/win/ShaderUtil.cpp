@@ -133,28 +133,28 @@ size_t SaveGX2VertexShader(
 
     for (u32 i = 0; i < shader->numUniformBlocks; i++)
     {
-        const char* const name = shader->uniformBlocks[i].name;
+        const char* const name = shader->uniformBlocks.getIndexed(i)->name.get();
         if (name != NULL)
             shaderBufSize += std::strlen(name) + 1;
     }
 
     for (u32 i = 0; i < shader->numUniforms; i++)
     {
-        const char* const name = shader->uniformVars[i].name;
+        const char* const name = shader->uniformVars.getIndexed(i)->name.get();
         if (name != NULL)
             shaderBufSize += std::strlen(name) + 1;
     }
 
     for (u32 i = 0; i < shader->numSamplers; i++)
     {
-        const char* const name = shader->samplerVars[i].name;
+        const char* const name = shader->samplerVars.getIndexed(i)->name.get();
         if (name != NULL)
             shaderBufSize += std::strlen(name) + 1;
     }
 
     for (u32 i = 0; i < shader->numAttribs; i++)
     {
-        const char* const name = shader->attribVars[i].name;
+        const char* const name = shader->attribVars.getIndexed(i)->name.get();
         if (name != NULL)
             shaderBufSize += std::strlen(name) + 1;
     }
@@ -165,14 +165,14 @@ size_t SaveGX2VertexShader(
     u8* shaderBuf = (u8*)rio::MemUtil::alloc(shaderBufSize, 4);
 
     std::memcpy(shaderBuf, shader, sizeof(GX2VertexShader));
-    std::memcpy(shaderBuf + shaderDataOffs, shader->shaderPtr, shader->shaderSize);
+    std::memcpy(shaderBuf + shaderDataOffs, shader->shaderPtr.get(), shader->shaderSize);
 
     *(u32*)(shaderBuf + offsetof(GX2VertexShader, shaderPtr)) = shaderDataOffs;
 
     if (shader->numUniformBlocks != 0)
     {
         std::memcpy(shaderBuf + uniformBlocksOffs,
-                    shader->uniformBlocks,
+                    shader->uniformBlocks.get(),
                     shader->numUniformBlocks * sizeof(GX2UniformBlock));
     }
 
@@ -181,7 +181,7 @@ size_t SaveGX2VertexShader(
     if (shader->numUniforms != 0)
     {
         std::memcpy(shaderBuf + uniformVarsOffs,
-                    shader->uniformVars,
+                    shader->uniformVars.get(),
                     shader->numUniforms * sizeof(GX2UniformVar));
     }
 
@@ -190,7 +190,7 @@ size_t SaveGX2VertexShader(
     if (shader->numInitialValues != 0)
     {
         std::memcpy(shaderBuf + initialValuesOffs,
-                    shader->initialValues,
+                    shader->initialValues.get(),
                     shader->numInitialValues * sizeof(GX2UniformInitialValue));
     }
 
@@ -199,7 +199,7 @@ size_t SaveGX2VertexShader(
     if (shader->_numLoops != 0)
     {
         std::memcpy(shaderBuf + loopVarsOffs,
-                    shader->_loopVars,
+                    shader->_loopVars.get(),
                     shader->_numLoops * sizeof(u32) * 2);
     }
 
@@ -208,7 +208,7 @@ size_t SaveGX2VertexShader(
     if (shader->numSamplers != 0)
     {
         std::memcpy(shaderBuf + samplerVarsOffs,
-                    shader->samplerVars,
+                    shader->samplerVars.get(),
                     shader->numSamplers * sizeof(GX2SamplerVar));
     }
 
@@ -217,7 +217,7 @@ size_t SaveGX2VertexShader(
     if (shader->numAttribs != 0)
     {
         std::memcpy(shaderBuf + attribVarsOffs,
-                    shader->attribVars,
+                    shader->attribVars.get(),
                     shader->numAttribs * sizeof(GX2AttribVar));
     }
 
@@ -227,7 +227,7 @@ size_t SaveGX2VertexShader(
 
     for (u32 i = 0; i < shader->numUniformBlocks; i++)
     {
-        const char* const name = shader->uniformBlocks[i].name;
+        const char* const name = shader->uniformBlocks.getIndexed(i)->name.get();
         if (name != NULL)
         {
             const size_t nameLen = std::strlen(name) + 1;
@@ -244,7 +244,7 @@ size_t SaveGX2VertexShader(
 
     for (u32 i = 0; i < shader->numUniforms; i++)
     {
-        const char* const name = shader->uniformVars[i].name;
+        const char* const name = shader->uniformVars.getIndexed(i)->name.get();
         if (name != NULL)
         {
             const size_t nameLen = std::strlen(name) + 1;
@@ -261,7 +261,7 @@ size_t SaveGX2VertexShader(
 
     for (u32 i = 0; i < shader->numSamplers; i++)
     {
-        const char* const name = shader->samplerVars[i].name;
+        const char* const name = shader->samplerVars.getIndexed(i)->name.get();
         if (name != NULL)
         {
             const size_t nameLen = std::strlen(name) + 1;
@@ -278,7 +278,7 @@ size_t SaveGX2VertexShader(
 
     for (u32 i = 0; i < shader->numAttribs; i++)
     {
-        const char* const name = shader->attribVars[i].name;
+        const char* const name = shader->attribVars.getIndexed(i)->name.get();
         if (name != NULL)
         {
             const size_t nameLen = std::strlen(name) + 1;
@@ -323,21 +323,21 @@ size_t SaveGX2PixelShader(
 
     for (u32 i = 0; i < shader->numUniformBlocks; i++)
     {
-        const char* const name = shader->uniformBlocks[i].name;
+        const char* const name = shader->uniformBlocks.getIndexed(i)->name.get();
         if (name != NULL)
             shaderBufSize += std::strlen(name) + 1;
     }
 
     for (u32 i = 0; i < shader->numUniforms; i++)
     {
-        const char* const name = shader->uniformVars[i].name;
+        const char* const name = shader->uniformVars.getIndexed(i)->name.get();
         if (name != NULL)
             shaderBufSize += std::strlen(name) + 1;
     }
 
     for (u32 i = 0; i < shader->numSamplers; i++)
     {
-        const char* const name = shader->samplerVars[i].name;
+        const char* const name = shader->samplerVars.getIndexed(i)->name.get();
         if (name != NULL)
             shaderBufSize += std::strlen(name) + 1;
     }
@@ -348,14 +348,14 @@ size_t SaveGX2PixelShader(
     u8* shaderBuf = (u8*)rio::MemUtil::alloc(shaderBufSize, 4);
 
     std::memcpy(shaderBuf, shader, sizeof(GX2PixelShader));
-    std::memcpy(shaderBuf + shaderDataOffs, shader->shaderPtr, shader->shaderSize);
+    std::memcpy(shaderBuf + shaderDataOffs, shader->shaderPtr.get(), shader->shaderSize);
 
     *(u32*)(shaderBuf + offsetof(GX2PixelShader, shaderPtr)) = shaderDataOffs;
 
     if (shader->numUniformBlocks != 0)
     {
         std::memcpy(shaderBuf + uniformBlocksOffs,
-                    shader->uniformBlocks,
+                    shader->uniformBlocks.get(),
                     shader->numUniformBlocks * sizeof(GX2UniformBlock));
     }
 
@@ -364,7 +364,7 @@ size_t SaveGX2PixelShader(
     if (shader->numUniforms != 0)
     {
         std::memcpy(shaderBuf + uniformVarsOffs,
-                    shader->uniformVars,
+                    shader->uniformVars.get(),
                     shader->numUniforms * sizeof(GX2UniformVar));
     }
 
@@ -373,7 +373,7 @@ size_t SaveGX2PixelShader(
     if (shader->numInitialValues != 0)
     {
         std::memcpy(shaderBuf + initialValuesOffs,
-                    shader->initialValues,
+                    shader->initialValues.get(),
                     shader->numInitialValues * sizeof(GX2UniformInitialValue));
     }
 
@@ -382,7 +382,7 @@ size_t SaveGX2PixelShader(
     if (shader->_numLoops != 0)
     {
         std::memcpy(shaderBuf + loopVarsOffs,
-                    shader->_loopVars,
+                    shader->_loopVars.get(),
                     shader->_numLoops * sizeof(u32) * 2);
     }
 
@@ -391,7 +391,7 @@ size_t SaveGX2PixelShader(
     if (shader->numSamplers != 0)
     {
         std::memcpy(shaderBuf + samplerVarsOffs,
-                    shader->samplerVars,
+                    shader->samplerVars.get(),
                     shader->numSamplers * sizeof(GX2SamplerVar));
     }
 
@@ -401,7 +401,7 @@ size_t SaveGX2PixelShader(
 
     for (u32 i = 0; i < shader->numUniformBlocks; i++)
     {
-        const char* const name = shader->uniformBlocks[i].name;
+        const char* const name = shader->uniformBlocks.getIndexed(i)->name.get();
         if (name != NULL)
         {
             const size_t nameLen = std::strlen(name) + 1;
@@ -418,7 +418,7 @@ size_t SaveGX2PixelShader(
 
     for (u32 i = 0; i < shader->numUniforms; i++)
     {
-        const char* const name = shader->uniformVars[i].name;
+        const char* const name = shader->uniformVars.getIndexed(i)->name.get();
         if (name != NULL)
         {
             const size_t nameLen = std::strlen(name) + 1;
@@ -435,7 +435,7 @@ size_t SaveGX2PixelShader(
 
     for (u32 i = 0; i < shader->numSamplers; i++)
     {
-        const char* const name = shader->samplerVars[i].name;
+        const char* const name = shader->samplerVars.getIndexed(i)->name.get();
         if (name != NULL)
         {
             const size_t nameLen = std::strlen(name) + 1;
@@ -556,14 +556,20 @@ bool DecompileProgram(
             RIO_SHADER_DEBUG_LOG("%s\n", cmd.c_str());
             RunCommand(cmd.c_str());
 
-            DeleteFile(vertexShaderPath.c_str());
-            DeleteFile(fragmentShaderPath.c_str());
-
             if (!FileExists(vertexShaderSpirvPath.c_str()))
+            {
+                RIO_SHADER_DEBUG_LOG("Vertex shader SPIR-V file not found\n");
                 return false;
+            }
 
             if (!FileExists(fragmentShaderSpirvPath.c_str()))
+            {
+                RIO_SHADER_DEBUG_LOG("Fragment shader SPIR-V file not found\n");
                 return false;
+            }
+
+            DeleteFile(vertexShaderPath.c_str());
+            DeleteFile(fragmentShaderPath.c_str());
 
             {
                 std::ostringstream cmdStrm;
@@ -639,9 +645,9 @@ bool DecompileProgram(
             RIO_SHADER_DEBUG_LOG("%s\n", cmd.c_str());
             RunCommand(cmd.c_str());
 
-            DeleteFile(vertexShaderSpirvPath.c_str());
             if (!FileExists(vertexShaderSrcPath.c_str()))
                 return false;
+            DeleteFile(vertexShaderSpirvPath.c_str());
 
             {
                 std::ostringstream cmdStrm;
@@ -717,9 +723,9 @@ bool DecompileProgram(
             RIO_SHADER_DEBUG_LOG("%s\n", cmd.c_str());
             RunCommand(cmd.c_str());
 
-            DeleteFile(fragmentShaderSpirvPath.c_str());
             if (!FileExists(fragmentShaderSrcPath.c_str()))
                 return false;
+            DeleteFile(fragmentShaderSpirvPath.c_str());
 
             {
                 [[maybe_unused]] bool read = ReadFile(vertexShaderSrcPath, &glVertexShader);
@@ -749,8 +755,8 @@ bool DecompileProgram(
             }
             else
             {
-                std::vector<GX2UniformBlock> vertexUBOs = std::vector<GX2UniformBlock>(vertexShader->uniformBlocks,
-                                                                                       vertexShader->uniformBlocks + vertexShader->numUniformBlocks);
+                std::vector<GX2UniformBlock> vertexUBOs = std::vector<GX2UniformBlock>(vertexShader->uniformBlocks.get(),
+                                                                                       vertexShader->uniformBlocks.getIndexed(vertexShader->numUniformBlocks));
 
                 std::sort(vertexUBOs.begin(), vertexUBOs.end(), GX2UniformBlockComp);
 
@@ -763,7 +769,7 @@ bool DecompileProgram(
                                   << "}";
 
                     std::ostringstream formatNewStrm;
-                    formatNewStrm << "layout(std140) uniform " << vertexUBOs[i].name << std::endl
+                    formatNewStrm << "layout(std140) uniform " << vertexUBOs[i].name.get() << std::endl
                                   << "{" << std::endl
                                   << "    vec4 values[" << ((vertexUBOs[i].size + 15) / 16) << "];" << std::endl
                                   << "}";
@@ -785,8 +791,8 @@ bool DecompileProgram(
             }
             else
             {
-                std::vector<GX2UniformBlock> pixelUBOs = std::vector<GX2UniformBlock>(pixelShader->uniformBlocks,
-                                                                                      pixelShader->uniformBlocks + pixelShader->numUniformBlocks);
+                std::vector<GX2UniformBlock> pixelUBOs = std::vector<GX2UniformBlock>(pixelShader->uniformBlocks.get(),
+                                                                                      pixelShader->uniformBlocks.getIndexed(pixelShader->numUniformBlocks));
 
                 std::sort(pixelUBOs.begin(), pixelUBOs.end(), GX2UniformBlockComp);
 
@@ -799,7 +805,7 @@ bool DecompileProgram(
                                   << "}";
 
                     std::ostringstream formatNewStrm;
-                    formatNewStrm << "layout(std140) uniform " << pixelUBOs[i].name << std::endl
+                    formatNewStrm << "layout(std140) uniform " << pixelUBOs[i].name.get() << std::endl
                                   << "{" << std::endl
                                   << "    vec4 values[" << ((pixelUBOs[i].size + 15) / 16) << "];" << std::endl
                                   << "}";
@@ -810,7 +816,7 @@ bool DecompileProgram(
 
             for (u32 i = 0; i < vertexShader->numSamplers; i++)
             {
-                const GX2SamplerVar& sampler = vertexShader->samplerVars[i];
+                const GX2SamplerVar& sampler = *vertexShader->samplerVars.getIndexed(i);
                 if (sampler.type != GX2_SAMPLER_TYPE_2D)
                     continue;
 
@@ -831,7 +837,7 @@ bool DecompileProgram(
                                   << sampler.location
                                   << "SPIRV_Cross_DummySampler";
 
-                    ReplaceString(glVertexShader, formatOldStrm.str(), sampler.name);
+                    ReplaceString(glVertexShader, formatOldStrm.str(), sampler.name.get());
                 }
                 // Replace 2D samplers
                 {
@@ -841,13 +847,13 @@ bool DecompileProgram(
                                   << "SAMPLER_"
                                   << sampler.location;
 
-                    ReplaceString(glVertexShader, formatOldStrm.str(), sampler.name);
+                    ReplaceString(glVertexShader, formatOldStrm.str(), sampler.name.get());
                 }
             }
 
             for (u32 i = 0; i < pixelShader->numSamplers; i++)
             {
-                const GX2SamplerVar& sampler = pixelShader->samplerVars[i];
+                const GX2SamplerVar& sampler = *pixelShader->samplerVars.getIndexed(i);
                 if (sampler.type != GX2_SAMPLER_TYPE_2D)
                     continue;
 
@@ -868,7 +874,7 @@ bool DecompileProgram(
                                   << sampler.location
                                   << "SPIRV_Cross_DummySampler";
 
-                    ReplaceString(glFragmentShader, formatOldStrm.str(), sampler.name);
+                    ReplaceString(glFragmentShader, formatOldStrm.str(), sampler.name.get());
                 }
                 // Replace 2D samplers
                 {
@@ -878,7 +884,7 @@ bool DecompileProgram(
                                   << "SAMPLER_"
                                   << sampler.location;
 
-                    ReplaceString(glFragmentShader, formatOldStrm.str(), sampler.name);
+                    ReplaceString(glFragmentShader, formatOldStrm.str(), sampler.name.get());
                 }
             }
 

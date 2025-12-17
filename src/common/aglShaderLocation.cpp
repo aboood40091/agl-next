@@ -93,7 +93,7 @@ GetVertexAttribLocation(const rio::Shader& shader, const GX2VertexShader* p_shad
 {
     for (u32 i = 0; i < p_shader->numAttribs; i++)
     {
-        if (std::strcmp(p_shader->attribVars[i].name, name) == 0)
+        if (std::strcmp(p_shader->attribVars.getIndexed(i)->name.get(), name) == 0)
         {
             std::ostringstream attribNameStrm;
             attribNameStrm << name << "_0_0";
@@ -111,8 +111,8 @@ GX2GetVertexUniformVar(const GX2VertexShader* shader, const char* name)
     RIO_ASSERT(name);
 
     for (u32 i = 0; i < shader->numUniforms; i++)
-       if (std::strcmp(shader->uniformVars[i].name, name) == 0)
-           return &(shader->uniformVars[i]);
+       if (std::strcmp(shader->uniformVars.getIndexed(i)->name.get(), name) == 0)
+           return shader->uniformVars.getIndexed(i);
 
     return nullptr;
 }
@@ -137,8 +137,8 @@ GX2GetPixelUniformVar(const GX2PixelShader* shader, const char* name)
     RIO_ASSERT(name);
 
     for (u32 i = 0; i < shader->numUniforms; i++)
-       if (std::strcmp(shader->uniformVars[i].name, name) == 0)
-           return &(shader->uniformVars[i]);
+       if (std::strcmp(shader->uniformVars.getIndexed(i)->name.get(), name) == 0)
+           return shader->uniformVars.getIndexed(i);
 
     return nullptr;
 }
@@ -163,8 +163,8 @@ GX2GetGeometryUniformVar(const GX2GeometryShader* shader, const char* name)
     RIO_ASSERT(name);
 
     for (u32 i = 0; i < shader->numUniforms; i++)
-       if (std::strcmp(shader->uniformVars[i].name, name) == 0)
-           return &(shader->uniformVars[i]);
+       if (std::strcmp(shader->uniformVars.getIndexed(i)->name.get(), name) == 0)
+           return shader->uniformVars.getIndexed(i);
 
     return nullptr;
 }

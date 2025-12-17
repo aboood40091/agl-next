@@ -99,7 +99,7 @@ void ModelShaderAttribute::bind(const nw::g3d::res::ResMaterial* p_res_mat, cons
     mFetchShader.Cleanup();
     mFetchShader.SetAttribCount(attribute_num);
     mFetchShader.CalcSize();
-    mFetchShader.SetDefault(mFetchShader.GetGX2FetchShader()->shaderPtr);
+    mFetchShader.SetDefault();
 
     for (s32 idx_attrib = 0; idx_attrib < attribute_num; idx_attrib++)
     {
@@ -113,11 +113,11 @@ void ModelShaderAttribute::bind(const nw::g3d::res::ResMaterial* p_res_mat, cons
             mVertexBufferNum++;
         }
 
-        mFetchShader.SetLocation(mFetchShader.GetGX2FetchShader()->shaderPtr, idx_attrib, attribute[idx_attrib].mLocation);
+        mFetchShader.SetLocation(idx_attrib, attribute[idx_attrib].mLocation);
         mFetchShader.SetVertexBuffer(idx_attrib, p_res_buffer->GetGfxBuffer());
-        mFetchShader.SetBufferSlot(mFetchShader.GetGX2FetchShader()->shaderPtr, idx_attrib, slot[p_res_vtx_attrib->GetBufferIndex()]);
-        mFetchShader.SetFormat(mFetchShader.GetGX2FetchShader()->shaderPtr, idx_attrib, p_res_vtx_attrib->GetFormat());
-        mFetchShader.SetOffset(mFetchShader.GetGX2FetchShader()->shaderPtr, idx_attrib, p_res_vtx_attrib->GetOffset());
+        mFetchShader.SetBufferSlot(idx_attrib, slot[p_res_vtx_attrib->GetBufferIndex()]);
+        mFetchShader.SetFormat(idx_attrib, p_res_vtx_attrib->GetFormat());
+        mFetchShader.SetOffset(idx_attrib, p_res_vtx_attrib->GetOffset());
     }
 
     mFetchShader.Setup();

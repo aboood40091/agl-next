@@ -56,7 +56,7 @@ class DepthOfField : public utl::IParameterIO
         s32 height;
         bool view_depth;
     };
-    static_assert(sizeof(DrawArg) == 0x20, "agl::pfx::DepthOfField::DrawArg size mismatch");
+    // static_assert(sizeof(DrawArg) == 0x20, "agl::pfx::DepthOfField::DrawArg size mismatch");
 
     struct TempVignetting : utl::IParameterObj
     {

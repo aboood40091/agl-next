@@ -53,7 +53,7 @@ public:
 #if RIO_IS_CAFE
         return static_cast<const u8*>(mpBuffer) + offset;
 #elif RIO_IS_DESKTOP
-        return (void*)offset;
+        return reinterpret_cast<void*>(offset);
 #endif
     }
 

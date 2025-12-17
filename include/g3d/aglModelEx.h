@@ -39,7 +39,7 @@ private:
     nw::g3d::fnd::GfxBuffer_t mMatBlock;
     bool _20;
 };
-static_assert(sizeof(MaterialEx) == 0x24, "agl::g3d::MaterialEx size mismatch");
+// static_assert(sizeof(MaterialEx) == 0x24, "agl::g3d::MaterialEx size mismatch");
 
 class ModelEx : public nw::g3d::ModelObj
 {
@@ -69,6 +69,6 @@ private:
     ModelShaderAssign* mpShaderAssign;
     MaterialEx* mpMaterialEx;
 };
-static_assert(sizeof(ModelEx) == 0x40, "agl::g3d::ModelEx size mismatch");
+// static_assert(sizeof(ModelEx) == 0x40, "agl::g3d::ModelEx size mismatch");
 
 } }

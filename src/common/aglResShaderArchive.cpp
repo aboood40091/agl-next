@@ -34,25 +34,28 @@ void modifyEndianResSymbolArray(bool is_le, agl::ResShaderSymbolArray symbol_arr
             agl::ModifyEndianU32(is_le, agl::ResShaderSymbol(&(*it)).getDefaultValue(), it->mDefaultValueSize);
 }
 
-#if RIO_IS_CAFE || RIO_IS_DESKTOP
+#if RIO_IS_CAFE
+
+#error "Make me work one day..."
+
+#elif RIO_IS_DESKTOP
 
 template <typename T>
-T* modifyBinaryAndNamePtr(void* base_ptr, T* ptr, s32 num)
+void modifyBinaryAndNamePtr(void* base_ptr, SerializedPtr<T>& serialized_ptr, s32 num)
 {
-    if (!ptr)
-        return nullptr;
+    if (serialized_ptr.getOffset() == 0)
+        return serialized_ptr.set(nullptr);
 
-    ptr = (T*)(uintptr_t(base_ptr) + uintptr_t(ptr));
+    serialized_ptr.resolveRelativePtr(base_ptr);
 
     for (s32 i = 0; i < num; i++)
-        ptr[i].name += uintptr_t(base_ptr);
-
-    return ptr;
+        serialized_ptr.getIndexed(i)->name.resolveRelativePtr(base_ptr);
 }
 
-void* modifyBinaryPtr(void* base_ptr, void* ptr)
+template <typename T>
+void modifyBinaryPtr(void* base_ptr, SerializedPtr<T>& serialized_ptr)
 {
-    return (void*)(uintptr_t(base_ptr) + uintptr_t(ptr));
+    serialized_ptr.resolveRelativePtr(base_ptr);
 }
 
 #endif // RIO_IS_CAFE || RIO_IS_DESKTOP
@@ -149,21 +152,21 @@ void ResShaderBinary::setUp()
             GX2VertexShader* vertex_shader = static_cast<GX2VertexShader*>(getData());
 
 #ifdef __WUT__
-            vertex_shader->uniformBlocks = modifyBinaryAndNamePtr<GX2UniformBlock>(vertex_shader, vertex_shader->uniformBlocks, vertex_shader->uniformBlockCount);
-            vertex_shader->uniformVars   = modifyBinaryAndNamePtr<GX2UniformVar  >(vertex_shader, vertex_shader->uniformVars,   vertex_shader->uniformVarCount);
-            vertex_shader->samplerVars   = modifyBinaryAndNamePtr<GX2SamplerVar  >(vertex_shader, vertex_shader->samplerVars,   vertex_shader->samplerVarCount);
-            vertex_shader->attribVars    = modifyBinaryAndNamePtr<GX2AttribVar   >(vertex_shader, vertex_shader->attribVars,    vertex_shader->attribVarCount);
+            modifyBinaryAndNamePtr(vertex_shader, vertex_shader->uniformBlocks, vertex_shader->uniformBlockCount);
+            modifyBinaryAndNamePtr(vertex_shader, vertex_shader->uniformVars,   vertex_shader->uniformVarCount);
+            modifyBinaryAndNamePtr(vertex_shader, vertex_shader->samplerVars,   vertex_shader->samplerVarCount);
+            modifyBinaryAndNamePtr(vertex_shader, vertex_shader->attribVars,    vertex_shader->attribVarCount);
 
-            vertex_shader->loopVars = static_cast<GX2LoopVar*>(modifyBinaryPtr(vertex_shader, vertex_shader->loopVars));
+            modifyBinaryPtr(vertex_shader, vertex_shader->loopVars);
 #else
-            vertex_shader->uniformBlocks = modifyBinaryAndNamePtr<GX2UniformBlock>(vertex_shader, vertex_shader->uniformBlocks, vertex_shader->numUniformBlocks);
-            vertex_shader->uniformVars   = modifyBinaryAndNamePtr<GX2UniformVar  >(vertex_shader, vertex_shader->uniformVars,   vertex_shader->numUniforms);
-            vertex_shader->samplerVars   = modifyBinaryAndNamePtr<GX2SamplerVar  >(vertex_shader, vertex_shader->samplerVars,   vertex_shader->numSamplers);
-            vertex_shader->attribVars    = modifyBinaryAndNamePtr<GX2AttribVar   >(vertex_shader, vertex_shader->attribVars,    vertex_shader->numAttribs);
+            modifyBinaryAndNamePtr(vertex_shader, vertex_shader->uniformBlocks, vertex_shader->numUniformBlocks);
+            modifyBinaryAndNamePtr(vertex_shader, vertex_shader->uniformVars,   vertex_shader->numUniforms);
+            modifyBinaryAndNamePtr(vertex_shader, vertex_shader->samplerVars,   vertex_shader->numSamplers);
+            modifyBinaryAndNamePtr(vertex_shader, vertex_shader->attribVars,    vertex_shader->numAttribs);
 
-            vertex_shader->_loopVars = modifyBinaryPtr(vertex_shader, vertex_shader->_loopVars);
+            modifyBinaryPtr(vertex_shader, vertex_shader->_loopVars);
 #endif // __WUT__
-            vertex_shader->shaderPtr = modifyBinaryPtr(vertex_shader, vertex_shader->shaderPtr);
+            modifyBinaryPtr(vertex_shader, vertex_shader->shaderPtr);
         }
         break;
     case cShaderType_Fragment:
@@ -171,19 +174,19 @@ void ResShaderBinary::setUp()
             GX2PixelShader* pixel_shader = static_cast<GX2PixelShader*>(getData());
 
 #ifdef __WUT__
-            pixel_shader->uniformBlocks = modifyBinaryAndNamePtr<GX2UniformBlock>(pixel_shader, pixel_shader->uniformBlocks, pixel_shader->uniformBlockCount);
-            pixel_shader->uniformVars   = modifyBinaryAndNamePtr<GX2UniformVar  >(pixel_shader, pixel_shader->uniformVars,   pixel_shader->uniformVarCount);
-            pixel_shader->samplerVars   = modifyBinaryAndNamePtr<GX2SamplerVar  >(pixel_shader, pixel_shader->samplerVars,   pixel_shader->samplerVarCount);
+            modifyBinaryAndNamePtr(pixel_shader, pixel_shader->uniformBlocks, pixel_shader->uniformBlockCount);
+            modifyBinaryAndNamePtr(pixel_shader, pixel_shader->uniformVars,   pixel_shader->uniformVarCount);
+            modifyBinaryAndNamePtr(pixel_shader, pixel_shader->samplerVars,   pixel_shader->samplerVarCount);
 
-            pixel_shader->loopVars = static_cast<GX2LoopVar*>(modifyBinaryPtr(pixel_shader, pixel_shader->loopVars));
+            modifyBinaryPtr(pixel_shader, pixel_shader->loopVars);
 #else
-            pixel_shader->uniformBlocks = modifyBinaryAndNamePtr<GX2UniformBlock>(pixel_shader, pixel_shader->uniformBlocks, pixel_shader->numUniformBlocks);
-            pixel_shader->uniformVars   = modifyBinaryAndNamePtr<GX2UniformVar  >(pixel_shader, pixel_shader->uniformVars,   pixel_shader->numUniforms);
-            pixel_shader->samplerVars   = modifyBinaryAndNamePtr<GX2SamplerVar  >(pixel_shader, pixel_shader->samplerVars,   pixel_shader->numSamplers);
+            modifyBinaryAndNamePtr(pixel_shader, pixel_shader->uniformBlocks, pixel_shader->numUniformBlocks);
+            modifyBinaryAndNamePtr(pixel_shader, pixel_shader->uniformVars,   pixel_shader->numUniforms);
+            modifyBinaryAndNamePtr(pixel_shader, pixel_shader->samplerVars,   pixel_shader->numSamplers);
 
-            pixel_shader->_loopVars = modifyBinaryPtr(pixel_shader, pixel_shader->_loopVars);
+            modifyBinaryPtr(pixel_shader, pixel_shader->_loopVars);
 #endif // __WUT__
-            pixel_shader->shaderPtr = modifyBinaryPtr(pixel_shader, pixel_shader->shaderPtr);
+            modifyBinaryPtr(pixel_shader, pixel_shader->shaderPtr);
         }
         break;
     case cShaderType_Geometry:
@@ -191,20 +194,20 @@ void ResShaderBinary::setUp()
             GX2GeometryShader* geometry_shader = static_cast<GX2GeometryShader*>(getData());
 
 #ifdef __WUT__
-            geometry_shader->uniformBlocks = modifyBinaryAndNamePtr<GX2UniformBlock>(geometry_shader, geometry_shader->uniformBlocks, geometry_shader->uniformBlockCount);
-            geometry_shader->uniformVars   = modifyBinaryAndNamePtr<GX2UniformVar  >(geometry_shader, geometry_shader->uniformVars,   geometry_shader->uniformVarCount);
-            geometry_shader->samplerVars   = modifyBinaryAndNamePtr<GX2SamplerVar  >(geometry_shader, geometry_shader->samplerVars,   geometry_shader->samplerVarCount);
+            modifyBinaryAndNamePtr(geometry_shader, geometry_shader->uniformBlocks, geometry_shader->uniformBlockCount);
+            modifyBinaryAndNamePtr(geometry_shader, geometry_shader->uniformVars,   geometry_shader->uniformVarCount);
+            modifyBinaryAndNamePtr(geometry_shader, geometry_shader->samplerVars,   geometry_shader->samplerVarCount);
 
-            geometry_shader->loopVars = static_cast<GX2LoopVar*>(modifyBinaryPtr(geometry_shader, geometry_shader->loopVars));
+            modifyBinaryPtr(geometry_shader, geometry_shader->loopVars);
 #else
-            geometry_shader->uniformBlocks = modifyBinaryAndNamePtr<GX2UniformBlock>(geometry_shader, geometry_shader->uniformBlocks, geometry_shader->numUniformBlocks);
-            geometry_shader->uniformVars   = modifyBinaryAndNamePtr<GX2UniformVar  >(geometry_shader, geometry_shader->uniformVars,   geometry_shader->numUniforms);
-            geometry_shader->samplerVars   = modifyBinaryAndNamePtr<GX2SamplerVar  >(geometry_shader, geometry_shader->samplerVars,   geometry_shader->numSamplers);
+            modifyBinaryAndNamePtr(geometry_shader, geometry_shader->uniformBlocks, geometry_shader->numUniformBlocks);
+            modifyBinaryAndNamePtr(geometry_shader, geometry_shader->uniformVars,   geometry_shader->numUniforms);
+            modifyBinaryAndNamePtr(geometry_shader, geometry_shader->samplerVars,   geometry_shader->numSamplers);
 
-            geometry_shader->_loopVars     = modifyBinaryPtr(geometry_shader, geometry_shader->_loopVars);
+            modifyBinaryPtr(geometry_shader, geometry_shader->_loopVars);
 #endif // __WUT__
-            geometry_shader->shaderPtr     = modifyBinaryPtr(geometry_shader, geometry_shader->shaderPtr);
-            geometry_shader->copyShaderPtr = modifyBinaryPtr(geometry_shader, geometry_shader->copyShaderPtr);
+            modifyBinaryPtr(geometry_shader, geometry_shader->shaderPtr);
+            modifyBinaryPtr(geometry_shader, geometry_shader->copyShaderPtr);
         }
         break;
     default:

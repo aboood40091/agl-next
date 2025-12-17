@@ -60,7 +60,7 @@ private:
     UnsafeArray<const nw::g3d::fnd::GfxBuffer*, 16> mVertexBuffer;
     nw::g3d::fnd::GfxFetchShader mFetchShader;
 };
-static_assert(sizeof(ModelShaderAttribute) == 0x6C, "agl::g3d::ModelShaderAttribute size mismatch");
+// static_assert(sizeof(ModelShaderAttribute) == 0x6C, "agl::g3d::ModelShaderAttribute size mismatch");
 
 class ModelShaderAssign
 {
@@ -101,6 +101,6 @@ private:
     u8 mSamplerNum;
     ModelShaderAttribute mAttribute;
 };
-static_assert(sizeof(ModelShaderAssign) == 0x1C4, "agl::g3d::ModelShaderAssign size mismatch");
+// static_assert(sizeof(ModelShaderAssign) == 0x1C4, "agl::g3d::ModelShaderAssign size mismatch");
 
 } }

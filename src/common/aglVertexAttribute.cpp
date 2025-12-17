@@ -186,7 +186,7 @@ void VertexAttribute::setUp()
                     internal_format.elem_count,
                     internal_format.type,
                     buffer->getStride(),
-                    (void*)buffer->getStreamOffset(attr->mStreamIndex)
+                    reinterpret_cast<void*>(buffer->getStreamOffset(attr->mStreamIndex))
                 ));
             }
             else
@@ -197,7 +197,7 @@ void VertexAttribute::setUp()
                     internal_format.type,
                     internal_format.normalized,
                     buffer->getStride(),
-                    (void*)buffer->getStreamOffset(attr->mStreamIndex)
+                    reinterpret_cast<void*>(buffer->getStreamOffset(attr->mStreamIndex))
                 ));
             }
         }

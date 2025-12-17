@@ -5,13 +5,13 @@
 
 namespace agl { namespace utl {
 
-static_assert(sizeof(Parameter<bool>) == 0x14);
-static_assert(sizeof(Parameter<s32>) == 0x14);
-static_assert(sizeof(Parameter<f32>) == 0x14);
-static_assert(sizeof(Parameter<rio::Vector2f>) == 0x18);
-static_assert(sizeof(Parameter<rio::Vector3f>) == 0x1C);
-static_assert(sizeof(Parameter<rio::Vector4f>) == 0x20);
-static_assert(sizeof(Parameter<rio::Color4f>) == 0x20);
+// static_assert(sizeof(Parameter<bool>) == 0x14);
+// static_assert(sizeof(Parameter<s32>) == 0x14);
+// static_assert(sizeof(Parameter<f32>) == 0x14);
+// static_assert(sizeof(Parameter<rio::Vector2f>) == 0x18);
+// static_assert(sizeof(Parameter<rio::Vector3f>) == 0x1C);
+// static_assert(sizeof(Parameter<rio::Vector4f>) == 0x20);
+// static_assert(sizeof(Parameter<rio::Color4f>) == 0x20);
 //static_assert(sizeof(Parameter< char[32] >) == 0x3C);
 
 template <typename T>

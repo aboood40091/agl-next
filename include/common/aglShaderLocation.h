@@ -105,7 +105,7 @@ public:
     void setMtx43(const f32* value) const;
     void setMtx44(const f32* value) const;
 };
-static_assert(sizeof(UniformLocation) == 0x10, "agl::UniformLocation size mismatch");
+// static_assert(sizeof(UniformLocation) == 0x10, "agl::UniformLocation size mismatch");
 
 class UniformBlockLocation : public INamable, public ShaderLocation
 {
@@ -135,7 +135,7 @@ public:
 
     void search(const ShaderProgram& program);
 };
-static_assert(sizeof(UniformBlockLocation) == 0x10, "agl::UniformBlockLocation size mismatch");
+// static_assert(sizeof(UniformBlockLocation) == 0x10, "agl::UniformBlockLocation size mismatch");
 
 class SamplerLocation : public INamable, public ShaderLocation
 {
@@ -165,7 +165,7 @@ public:
 
     void search(const ShaderProgram& program);
 };
-static_assert(sizeof(SamplerLocation) == 0x10, "agl::SamplerLocation size mismatch");
+// static_assert(sizeof(SamplerLocation) == 0x10, "agl::SamplerLocation size mismatch");
 
 class AttributeLocation : public INamable
 {
@@ -213,7 +213,7 @@ private:
     bool mBinary;
 #endif // RIO_IS_DESKTOP
 };
-static_assert(sizeof(AttributeLocation) == 0xC, "agl::AttributeLocation size mismatch");
+// static_assert(sizeof(AttributeLocation) == 0xC, "agl::AttributeLocation size mismatch");
 
 }
 

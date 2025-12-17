@@ -145,9 +145,9 @@ void TextureData::initializeFromSurface(const GX2Surface& surface)
     RIO_ASSERT(surface.depth == 1);
     RIO_ASSERT(surface.aa == GX2_AA_MODE_1X);
     RIO_ASSERT(surface.use & GX2_SURFACE_USE_TEXTURE);
-    RIO_ASSERT(surface.imageSize && surface.imagePtr);
+    RIO_ASSERT(surface.imageSize && surface.imagePtr.get());
     RIO_ASSERT((surface.numMips <= 1 && !surface.mipSize) ||
-               (surface.numMips > 1 && surface.mipSize && surface.mipPtr));
+               (surface.numMips > 1 && surface.mipSize && surface.mipPtr.get()));
 
 #if RIO_IS_CAFE
 
@@ -170,8 +170,8 @@ void TextureData::initializeFromSurface(const GX2Surface& surface)
     mSurface.mipmapSize = surface.mipSize;
     mSurface.mipLevelOffset[0] = 0;
     rio::MemUtil::copy(&mSurface.mipLevelOffset[1], &surface.mipOffset[1], sizeof(u32) * (13 - 1));
-    mSurface.image = surface.imagePtr;
-    mSurface.mipmaps = surface.mipPtr;
+    mSurface.image = surface.imagePtr.get();
+    mSurface.mipmaps = surface.mipPtr.get();
 
     mHandle = std::make_shared<TextureHandle>();
     mHandle->bind();

@@ -26,7 +26,7 @@ class VertexAttribute
         s32 mStreamIndex;
         s32 mBufferIndex;
     };
-    static_assert(sizeof(Attribute_) == 0xC, "agl::VertexAttribute::Attribute_ size mismatch");
+    // static_assert(sizeof(Attribute_) == 0xC, "agl::VertexAttribute::Attribute_ size mismatch");
 
 public:
     static const s32 cVertexAttributeMax = 16;

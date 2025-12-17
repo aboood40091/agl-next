@@ -72,8 +72,8 @@ void TextureDataInitializerG3D::initialize(TextureData* p_texture_data, nw::g3d:
     RIO_ASSERT(p_texture_data != nullptr);
 
     GX2Texture texture = *res_texture.GetGfxTexture()->GetGX2Texture();
-    texture.surface.imagePtr = res_texture.GetData();
-    texture.surface.mipPtr = res_texture.GetMipData();
+    texture.surface.imagePtr.set(res_texture.GetData());
+    texture.surface.mipPtr.set(res_texture.GetMipData());
 
     detail::TextureDataUtil::initializeFromSurface(p_texture_data, texture.surface);
 
