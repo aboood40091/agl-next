@@ -27,5 +27,4 @@ public:
 
 private:
     const char* mINamableName;
-    u32 _pad;
 };
