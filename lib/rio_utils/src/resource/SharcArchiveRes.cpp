@@ -5,6 +5,9 @@
 #include <resource/SharcHasher.h>
 
 #include <cstdio>
+#include <type_traits>
+
+using signed_size_t = std::make_signed_t<std::size_t>;
 
 namespace {
 
@@ -222,7 +225,7 @@ bool SharcArchiveRes::prepareArchive(const void* archive, bool fatal_errors)
     }
 
     mFNTBlock = reinterpret_cast<const char*>(fnt_header) + SHARC_ENDIAN_TO_HOST(fnt_header->header_size);
-    if (static_cast<s32>(SHARC_ENDIAN_TO_HOST(mArchiveBlockHeader->data_block_offset)) < static_cast<ssize_t>(GetOffsetFromPtr(mArchiveBlockHeader, mFNTBlock)))
+    if (static_cast<s32>(SHARC_ENDIAN_TO_HOST(mArchiveBlockHeader->data_block_offset)) < static_cast<signed_size_t>(GetOffsetFromPtr(mArchiveBlockHeader, mFNTBlock)))
     {
         if (fatal_errors)
         {
