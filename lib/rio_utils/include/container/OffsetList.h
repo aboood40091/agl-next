@@ -137,8 +137,6 @@ public:
     }
 
 protected:
-    static s32 compareT(const T*, const T*);
-
     rio::LinkListNode* objToListNode(const T* obj) const
     {
         return reinterpret_cast<rio::LinkListNode*>((uintptr_t)obj + mOffset);

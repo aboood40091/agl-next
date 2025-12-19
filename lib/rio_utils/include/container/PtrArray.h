@@ -103,9 +103,6 @@ static_assert(sizeof(PtrArrayImpl) == 0xC, "PtrArrayImpl size mismatch");
 template <typename T>
 class PtrArray : public PtrArrayImpl
 {
-private:
-    typedef s32 (*CompareCallback)(const T*, const T*);
-
 public:
     PtrArray()
         : PtrArrayImpl()
@@ -126,18 +123,18 @@ public:
     void replace(s32 pos, T* ptr) { PtrArrayImpl::replace(pos, (void*)ptr); }
     s32 indexOf(const T* ptr) const { return PtrArrayImpl::indexOf(ptr); }
     void* getWork() const { return mPtrs; }
-    void sort() { sort(compareT); }
-    void sort(CompareCallback cmp) { PtrArrayImpl::sort((CompareCallbackImpl)cmp); }
-    void heapSort() { heapSort(compareT); }
-    void heapSort(CompareCallback cmp) { PtrArrayImpl::heapSort((CompareCallbackImpl)cmp); }
-    bool equal(const PtrArray<T>* o, CompareCallback cmp) const { return PtrArrayImpl::equal(*o, (CompareCallbackImpl)cmp); }
-    s32 compare(const PtrArray<T>* o, CompareCallback cmp) const { return PtrArrayImpl::compare(*o, (CompareCallbackImpl)cmp); }
+    // void sort() { sort(compareT); }
+    void sort(CompareCallbackImpl cmp) { PtrArrayImpl::sort(cmp); }
+    // void heapSort() { heapSort(compareT); }
+    void heapSort(CompareCallbackImpl cmp) { PtrArrayImpl::heapSort(cmp); }
+    bool equal(const PtrArray<T>* o, CompareCallbackImpl cmp) const { return PtrArrayImpl::equal(*o, cmp); }
+    s32 compare(const PtrArray<T>* o, CompareCallbackImpl cmp) const { return PtrArrayImpl::compare(*o, cmp); }
     T* find(const T* ptr) const;
-    T* find(const T* ptr, CompareCallback cmp) const;
+    T* find(const T* ptr, CompareCallbackImpl cmp) const;
     s32 search(const T* ptr) const;
-    s32 search(const T* ptr, CompareCallback cmp) const;
+    s32 search(const T* ptr, CompareCallbackImpl cmp) const;
     s32 binarySearch(const T* ptr) const;
-    s32 binarySearch(const T* ptr, CompareCallback cmp) const;
+    s32 binarySearch(const T* ptr, CompareCallbackImpl cmp) const;
     bool operator==(const PtrArray<T>&) const;
     bool operator!=(const PtrArray<T>&) const;
     bool operator<(const PtrArray<T>&) const;
@@ -145,7 +142,7 @@ public:
     bool operator>(const PtrArray<T>&) const;
     bool operator>=(const PtrArray<T>&) const;
     void uniq();
-    void uniq(CompareCallback cmp);
+    void uniq(CompareCallbackImpl cmp);
 
 public:
     class iterator
@@ -256,8 +253,8 @@ public:
         return constIterator(reinterpret_cast<T**>(mPtrs) + mPtrNum);
     }
 
-protected:
-    static s32 compareT(const T*, const T*);
+// protected:
+//     static s32 compareT(const T*, const T*);
 };
 
 template <typename T, s32 N>
