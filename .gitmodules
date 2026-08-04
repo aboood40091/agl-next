@@ -10,3 +10,6 @@
 	path = lib/ninTexUtils
 	url = https://github.com/aboood40091/ninTexUtils
 	branch = cpp
+[submodule "lib/CafeSDKWrappers"]
+	path = lib/CafeSDKWrappers
+	url = https://github.com/nw4f/CafeSDKWrappers
